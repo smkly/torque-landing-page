@@ -4,18 +4,18 @@ export interface Stat {
 }
 
 export const heroStats: Stat[] = [
-  { value: "$10M+", label: "Distributed" },
-  { value: "906K", label: "Wallets Analyzed" },
-  { value: "89M+", label: "Transactions Indexed" },
+  { value: "5x", label: "ROI on Incentive Spend" },
+  { value: "$10M+", label: "Incentives Distributed" },
+  { value: "$3B+", label: "Volume Driven" },
 ];
 
 // Rotating text phrases for hero
 export const heroRotatingPhrases = [
-  "On-chain Growth",
-  "Token Rewards",
-  "Incentives",
-  "Leaderboards",
-  "Competitions",
+  "100x ROI",
+  "Real Users",
+  "Zero Waste",
+  "Sybil-Free Growth",
+  "Proven Results",
 ];
 
 // Scramble character sets

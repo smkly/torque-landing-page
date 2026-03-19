@@ -2,7 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { ArrowUpRight, CircleDot, CreditCard, TrendingUp } from "lucide-react";
+import { ArrowUpRight, Zap, Repeat, Coins } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VisualCard } from "@/components/card-visuals/VisualCard";
 import { SplitText } from "@/components/animations/SplitText";
@@ -87,12 +87,12 @@ export default function Solutions() {
             </div>
 
             <SplitText tag="h2" className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              <span>Engineering Protocol</span>
-              <span className="text-black/40">Equilibrium</span>
+              <span>Every Protocol Has</span>
+              <span className="text-black/40">a Leaky Bucket</span>
             </SplitText>
 
             <p data-animate="fade-up" className="text-lg md:text-xl text-black/60 max-w-2xl">
-              Every sector has a systemic flaw. Torque provides the diagnostics to find the leak and the primitives to fix it.
+              You already know where users drop off. Now do something about it.
             </p>
           </div>
           <div data-animate="fade-up">
@@ -107,36 +107,36 @@ export default function Solutions() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <div data-animate="fade-up">
             <SolutionCard
-              icon={CreditCard}
-              title="Lending"
-              subtitle="Targeted Liquidity Injection"
-              filename="lending.strategy"
-              visual={LiquidityPool}
-              diagnosis="The Utilization Paradox (High TVL / Low Borrowing)"
-              fix="Reward 'First-Time' LPs with duration-weighted bonuses to prime the pump."
-            />
-          </div>
-          <div data-animate="fade-up">
-            <SolutionCard
-              icon={TrendingUp}
-              title="Perps"
-              subtitle="Habit Formation Architecture"
-              filename="perps.strategy"
+              icon={Zap}
+              title="Trading Apps & Terminals"
+              subtitle="Mercenary Trader Problem"
+              filename="trading.strategy"
               visual={RetentionLoop}
-              diagnosis="The 'One-and-Done' Trader (High Churn)"
-              fix="Incentivize 'Streaks' over raw volume to build habitual protocol usage."
+              diagnosis="Users trade once for the airdrop and ghost. Rented volume."
+              fix="Streaks, lotteries, and loyalty that reward consistency over size."
             />
           </div>
           <div data-animate="fade-up">
             <SolutionCard
-              icon={CircleDot}
-              title="Stablecoins"
-              subtitle="Distribution Nodes"
-              filename="stablecoin.strategy"
+              icon={Repeat}
+              title="DEXs & Aggregators"
+              subtitle="Zero Switching Cost Problem"
+              filename="dex.strategy"
+              visual={LiquidityPool}
+              diagnosis="Users route wherever fees are cheapest. Zero loyalty, zero stickiness."
+              fix="Leaderboards, referrals, and raffles that give users a reason to stay."
+            />
+          </div>
+          <div data-animate="fade-up">
+            <SolutionCard
+              icon={Coins}
+              title="Tokens & Stablecoins"
+              subtitle="Dead Liquidity Problem"
+              filename="token.strategy"
               visual={VelocityFlow}
               visualFill="full"
-              diagnosis="The Velocity Gap ($175M+ Cap / 0 Velocity)"
-              fix="Use referral rebates to turn passive holders into active transaction agents."
+              diagnosis="High market cap, zero velocity. Your token sits in wallets doing nothing."
+              fix="Referral rebates and spend rewards that turn holders into active users."
             />
           </div>
         </div>

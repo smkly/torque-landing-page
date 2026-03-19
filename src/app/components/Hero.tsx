@@ -154,8 +154,8 @@ const Hero = () => {
         <div className="absolute inset-0 z-0">
           <InteractiveGradient />
 
-          {/* ASCII Helicoid — fills viewport */}
-          <div className="absolute inset-0">
+          {/* ASCII Helicoid — right side only so it doesn't overlap text */}
+          <div className="absolute inset-y-0 right-0 w-[60%] hidden lg:block">
             <TorqueHelicoid />
           </div>
 
@@ -178,7 +178,7 @@ const Hero = () => {
                   style={{ opacity: 0 }}
                 >
                   <Terminal className="w-3 h-3" />
-                  <span>89M+ transactions indexed</span>
+                  <span>$3B+ in volume driven</span>
                   <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
                 </div>
 
@@ -190,8 +190,8 @@ const Hero = () => {
                   stagger={0.3}
                   useScrollTrigger={false}
                 >
-                  <span>The Onchain</span>
-                  <span>Growth Engine</span>
+                  <span>Stop Wasting Rewards.</span>
+                  <span>Start Growing.</span>
                 </SplitText>
 
                 {/* Subheadline */}
@@ -200,7 +200,7 @@ const Hero = () => {
                   className="text-lg md:text-xl text-black/60 mb-8 leading-relaxed"
                   style={{ opacity: 0 }}
                 >
-                  Turn raw Solana data into surgical incentives. Torque automates the logic of acquisition, retention, and liquidity—eliminating capital friction.
+                  Incentive infrastructure for onchain protocols and tokens. Launch campaigns, measure what works, iterate fast.
                 </p>
 
                 {/* Action Buttons */}
@@ -214,7 +214,7 @@ const Hero = () => {
                     className="group"
                     style={{ opacity: 0 }}
                   >
-                    Deploy Logic
+                    Book a Demo
                     <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Button>
                   <Button
@@ -222,7 +222,7 @@ const Hero = () => {
                     href="/primitives"
                     style={{ opacity: 0 }}
                   >
-                    Explore Primitives
+                    See How It Works
                     <ArrowUpRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>

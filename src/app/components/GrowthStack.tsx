@@ -2,7 +2,7 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-import { Code, Trophy, Brain, Zap, ArrowUpRight, Terminal } from "lucide-react";
+import { Layers, Shield, BarChart3, Zap, ArrowUpRight, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ImageGradient } from "@/components/ascii/ImageGradient";
 import { CardVisualWrapper } from "@/components/card-visuals/CardVisualWrapper";
@@ -40,11 +40,11 @@ export default function GrowthStack() {
               Platform Features
             </div>
             <SplitText tag="h2" className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-black leading-[1.1] tracking-tight">
-              <span>The Growth</span>
-              <span className="text-black/40">Engine</span>
+              <span>The Incentive</span>
+              <span className="text-black/40">Toolkit</span>
             </SplitText>
             <p data-animate="fade-up" className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              An onchain CRM and incentive engine designed to identify, predict, and retain high-value participants with surgical precision.
+              Launch campaigns, filter bad actors, and measure ROI.
             </p>
           </div>
           <div data-animate="fade-up">
@@ -57,49 +57,54 @@ export default function GrowthStack() {
 
         {/* Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-          {/* Large Card - Programmable Rewards */}
+          {/* Large Card - Incentive Primitives */}
           <div data-animate="fade-up" className="md:col-span-2 lg:col-span-2">
             <FeatureCard
-              icon={Code}
-              title="Programmable Rewards"
-              description='Set conditions like "only reward users who hold >$1K and traded 3+ times this week." No more paying for bots or one-time farmers.'
+              icon={Layers}
+              title="Incentive Primitives"
+              description="Leaderboards, rebates, raffles, referrals, and more. Go live in minutes."
               visual={<RewardFlow color="#0008FF" />}
-              filename="rewards.config"
+              filename="campaigns.config"
               features={[
-                { icon: Zap, label: "Conditional Logic" },
-                { dot: true, label: "Real-time" },
+                { icon: Zap, label: "Leaderboards" },
+                { icon: Zap, label: "Rebates" },
+                { icon: Zap, label: "Raffles" },
+                { icon: Zap, label: "Gifts" },
+                { dot: true, label: "Referrals" },
+                { dot: true, label: "Quests" },
+                { dot: true, label: "Streaks" },
               ]}
               large
               featured
             />
           </div>
 
-          {/* Small Card - Leaderboards */}
+          {/* Small Card - Sybil Protection */}
           <div data-animate="fade-up">
             <FeatureCard
-              icon={Trophy}
-              title="Leaderboards"
-              description="Real-time rankings turn passive holders into competing power users."
+              icon={Shield}
+              title="Sybil Filtering"
+              description="Filter wash traders, bots, and zero-value wallets before you pay them."
               visual={<RankOrbit color="#0008FF" competitorCount={6} />}
-              filename="leaderboard.tsx"
-              metric="2.1x volume increase"
+              filename="sybil.guard"
+              metric="15K+ sybils caught"
             />
           </div>
 
-          {/* Small Card - AI Insights */}
+          {/* Small Card - Prove Your ROI */}
           <div data-animate="fade-up">
             <FeatureCard
-              icon={Brain}
-              title="AI Insights"
-              description='Ask "Which wallets are about to churn?" and get actionable recommendations.'
+              icon={BarChart3}
+              title="ROI Measurement"
+              description="See exactly what each dollar of incentives produced. Put real numbers in front of your board."
               visual={<NeuralPulse color="#0008FF" nodeCount={10} />}
-              filename="intelligence.ai"
-              metric="Predictive analytics"
+              filename="analytics.roi"
+              metric="Real-time measurement"
               speed={1.5}
             />
           </div>
 
-          {/* Wide Card - API / SDK */}
+          {/* Wide Card - Launch in Minutes */}
           <div data-animate="fade-up" className="md:col-span-2 lg:col-span-2">
             <APICard />
           </div>
@@ -172,7 +177,7 @@ function FeatureCard({
           </p>
 
           {features && (
-            <div className="relative pt-3 border-t border-black/10 flex items-center gap-4">
+            <div className="relative pt-3 border-t border-black/10 flex flex-wrap items-center gap-x-4 gap-y-2">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-center gap-1.5 text-[10px] text-black/50">
                   {feature.icon && <feature.icon className="w-3 h-3" />}
@@ -232,14 +237,14 @@ function APICard() {
           </div>
 
           <h3 className="relative font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
-            Developer-first Infrastructure
+            Launch in Minutes
           </h3>
           <p className="relative text-black/60 text-xs leading-relaxed mb-3">
-            Full API access, webhooks, and SDK for seamless integration.
+            Whitelabel SDK. 5-minute integration. Your brand, your UI, our engine.
           </p>
 
           <div className="relative pt-3 border-t border-black/10 flex flex-wrap items-center gap-1.5">
-            {["REST API", "Webhooks", "SDK"].map((item) => (
+            {["Whitelabel SDK", "REST API", "Webhooks", "5-min Setup"].map((item) => (
               <span
                 key={item}
                 className="px-2 py-1 bg-white/80 backdrop-blur-sm rounded-[2px] font-mono text-[10px] text-black/60"

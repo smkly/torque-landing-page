@@ -75,9 +75,9 @@ export function ScrollProvider({ children, options = {} }: ScrollProviderProps) 
     ).matches;
 
     const lenis = new Lenis({
-      lerp: prefersReducedMotion ? 1 : options.lerp ?? 0.1,
-      duration: prefersReducedMotion ? 0 : options.duration ?? 1.2,
-      smoothWheel: !prefersReducedMotion && (options.smoothWheel ?? true),
+      lerp: 1,
+      duration: 0,
+      smoothWheel: false,
       wheelMultiplier: options.wheelMultiplier ?? 1,
     });
 

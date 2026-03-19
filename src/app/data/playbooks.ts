@@ -1,4 +1,4 @@
-import { Zap, Users, TrendingUp, type LucideIcon } from "lucide-react";
+import { Zap, Trophy, Users, type LucideIcon } from "lucide-react";
 
 export interface PlaybookFormula {
   trigger: string;
@@ -22,45 +22,42 @@ export interface Playbook {
 export const featuredPlaybooks: Playbook[] = [
   {
     id: "01",
-    type: "RECIPE",
-    title: 'The "100x" Volume Raffle',
-    sector: "DEX",
+    type: "CASE_STUDY",
+    title: "Winners Arc",
+    sector: "Multi-Protocol",
     description:
-      'Stop paying linear rebates. Use "Lottery Psychology" to drive 100x volume per dollar spent.',
-    formula: {
-      trigger: "Trade > $100",
-      condition: "User holds 1 Raffle Ticket",
-      reward: "Daily Jackpot",
-    },
-    icon: Zap,
-    visualType: "raffle",
+      "$204M in volume. 5x ROI. Daily leaderboard across Axiom, WLFI, and Raydium.",
+    metricBadge: "5x ROI",
+    icon: Trophy,
+    visualType: "network",
     visualFill: "full",
   },
   {
     id: "02",
     type: "RECIPE",
-    title: "The Social Distribution Engine",
-    sector: "Stablecoins",
+    title: "Dynamic Rebates",
+    sector: "DEX",
     description:
-      "Turn passive holders into distribution nodes. Double-sided rewards with Sybil protection.",
+      "$625M in volume. 165K participants. Proportional daily rebates that scale with activity.",
     formula: {
-      trigger: "Referee Volume > $500",
-      condition: "Referee Balance > $10 (7d)",
-      reward: "$75 / $40 Split",
+      trigger: "Daily Trading Volume",
+      condition: "Proportional Allocation",
+      reward: "Dynamic Rebate (bips)",
     },
-    icon: Users,
-    visualType: "network",
+    metricBadge: "$625M Volume",
+    icon: Zap,
+    visualType: "raffle",
     visualFill: "full",
   },
   {
-    id: "07",
-    type: "CASE_STUDY",
-    title: "Tier-1 Solana AMM",
-    sector: "DEX",
+    id: "03",
+    type: "FRAMEWORK",
+    title: "Power User Conversion",
+    sector: "Retention",
     description:
-      "How a top Solana DEX generated 102 SOL of volume for every 1 SOL spent on rewards.",
-    metricBadge: "100x ROI",
-    icon: TrendingUp,
+      "Reward claimers are 9.4x more likely to become power users. Incentives don't just acquire — they transform behavior.",
+    metricBadge: "9.4x Conversion",
+    icon: Users,
     visualType: "growth",
     visualFill: "full",
   },

@@ -113,7 +113,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-xs">
-              Torque exists to replace &ldquo;vibes-based&rdquo; marketing with deterministic, programmable ROI. No waste. Just growth.
+              Incentive infrastructure for onchain protocols and tokens.
             </p>
             {/* Social Links */}
             <div className="flex items-center gap-3">
@@ -173,10 +173,10 @@ const Footer = () => {
           {/* Start Building Column */}
           <div>
             <h4 className="font-mono text-xs uppercase tracking-widest text-white/50 mb-6">
-              Start Building
+              Get Started
             </h4>
             <p className="text-white/60 text-sm mb-4">
-              Deploy programmable growth on Solana.
+              Launch your first campaign in under 24 hours.
             </p>
             <Button variant="inverse-outline" href="https://app.torque.so">
               Launch App
@@ -193,22 +193,22 @@ const Footer = () => {
           <div className="lg:col-span-3 max-w-xl">
             <div className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-white/40">
               <Rocket className="w-3 h-3" />
-              Ready to Deploy?
+              Let&apos;s Talk
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-medium text-white leading-[1.1] tracking-tight mb-4">
-              Ready to engineer{" "}
-              <span className="text-white/40">protocol equilibrium?</span>
+              Start running incentives{" "}
+              <span className="text-white/40">that actually work.</span>
             </h2>
             <p className="text-base text-white/60 mb-6">
-              Torque exists to replace &ldquo;vibes-based&rdquo; marketing with deterministic, programmable ROI. No waste. Just growth.
+              Talk to our team and get your first campaign live in under 24 hours.
             </p>
             <div className="flex flex-wrap items-center gap-4">
               <Button variant="inverse" onClick={() => setIsModalOpen(true)}>
-                Deploy Logic
+                Book a Demo
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
-              <Button variant="inverse-outline" href="/primitives">
-                Explore Primitives
+              <Button variant="inverse-outline" href="/playbooks">
+                View Playbooks
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
             </div>
