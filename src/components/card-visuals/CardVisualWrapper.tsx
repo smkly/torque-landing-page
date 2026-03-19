@@ -114,9 +114,10 @@ export function CardVisualWrapper({
     target.addEventListener("mouseenter", onEnter);
     target.addEventListener("mouseleave", onLeave);
 
+    const cleanup = target;
     return () => {
-      target.removeEventListener("mouseenter", onEnter);
-      target.removeEventListener("mouseleave", onLeave);
+      cleanup?.removeEventListener("mouseenter", onEnter);
+      cleanup?.removeEventListener("mouseleave", onLeave);
     };
   }, [isMobile]);
 
