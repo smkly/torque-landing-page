@@ -4,10 +4,11 @@ import React from "react";
 import Image from "next/image";
 
 const logos = [
-  { name: "Solana", src: "/logos/solana.svg" },
   { name: "Raydium", src: "/logos/raydium.svg" },
+  { name: "Axiom", src: "/logos/axiom.svg" },
+  { name: "USD1", src: "/logos/usd1.svg" },
   { name: "Metaplex", src: "/logos/metaplex.svg" },
-  { name: "Darklake", src: "/logos/darklake.svg" },
+  { name: "Solana", src: "/logos/solana.svg" },
 ];
 
 export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
@@ -18,7 +19,7 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
           data-animate="fade-up"
           className="font-mono text-xs uppercase tracking-wider text-black/40 mb-8 text-center"
         >
-          Trusted by leading protocols
+          Trusted by Leading Companies
         </p>
 
         {/* Animated logos */}

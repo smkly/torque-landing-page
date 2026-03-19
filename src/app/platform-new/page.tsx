@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
 import { CardVisualWrapper } from "@/components/card-visuals/CardVisualWrapper";
-import { ImageGradient } from "@/components/ascii/ImageGradient";
+import { SplitText } from "@/components/animations/SplitText";
 import {
   ArrowUpRight,
   Code,
@@ -23,6 +23,10 @@ import {
   Users,
   Terminal,
   Check,
+  UserPlus,
+  RefreshCw,
+  Sparkles,
+  Rocket,
 } from "lucide-react";
 
 const DataLens = dynamic(
@@ -49,34 +53,126 @@ const MetricPulse = dynamic(
   () => import("@/components/card-visuals/MetricPulse").then(mod => ({ default: mod.MetricPulse })),
   { ssr: false }
 );
+const IntegrationRequestModal = dynamic(
+  () => import("../components/IntegrationRequestModal"),
+  { ssr: false }
+);
 
 // =============================================================================
-// Platform Page
+// Operations Data (condensed for summary grid)
 // =============================================================================
-export default function PlatformPage() {
+interface OperationRow {
+  number: string;
+  name: string;
+  description: string;
+  stat: string;
+  statLabel: string;
+  primitives: string[];
+  icon: React.ElementType;
+}
+
+const OPERATIONS: OperationRow[] = [
+  {
+    number: "01",
+    name: "Acquire",
+    description: "Get users in the door",
+    stat: "~$10",
+    statLabel: "CAC",
+    primitives: ["Raffles", "Gifts", "Referrals"],
+    icon: UserPlus,
+  },
+  {
+    number: "02",
+    name: "Activate",
+    description: "First meaningful action",
+    stat: "9.4x",
+    statLabel: "power user conversion",
+    primitives: ["Leaderboards", "First-Trade Hooks"],
+    icon: Zap,
+  },
+  {
+    number: "03",
+    name: "Retain",
+    description: "Keep them coming back",
+    stat: "96%",
+    statLabel: "retention at 4 claims",
+    primitives: ["Streaks", "Rebates"],
+    icon: RefreshCw,
+  },
+  {
+    number: "04",
+    name: "Scale",
+    description: "Autopilot growth",
+    stat: "$625M",
+    statLabel: "volume driven",
+    primitives: ["Dynamic Rebates", "Pro-Rata"],
+    icon: TrendingUp,
+  },
+  {
+    number: "05",
+    name: "Transform",
+    description: "Change user behavior",
+    stat: "9.4x",
+    statLabel: "power user conversion",
+    primitives: ["Compounding across all primitives"],
+    icon: Sparkles,
+  },
+];
+
+// =============================================================================
+// Platform New Page
+// =============================================================================
+export default function PlatformNewPage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <Navbar />
 
       <main className="relative z-10 min-h-screen bg-white pt-24 md:pt-32">
-        {/* Page Header */}
-        <header className="w-full px-6 md:px-12 lg:px-20 pb-12 md:pb-16 border-b border-black/10">
+        {/* ================================================================= */}
+        {/* Hero Section */}
+        {/* ================================================================= */}
+        <header className="w-full px-6 md:px-12 lg:px-20 pb-16 md:pb-24 border-b border-black/10">
           <div className="max-w-4xl">
-            <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-wider text-black/40">
+            {/* Badge */}
+            <div
+              data-animate="fade-up"
+              className="inline-flex items-center gap-2 mb-6 font-mono text-[10px] uppercase tracking-wider text-black/40"
+            >
               <span className="w-1 h-1 bg-blue rounded-full" />
               Platform
             </div>
-            <h1 data-animate="fade-up" className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] tracking-tight mb-4">
-              The Growth Operating System
+
+            {/* Title */}
+            <h1
+              data-animate="fade-up"
+              className="font-display text-4xl sm:text-5xl lg:text-6xl font-medium text-black leading-[1.05] tracking-tight mb-6"
+            >
+              The Growth{" "}
+              <span className="text-blue">Operating System</span>
             </h1>
-            <p data-animate="fade-up" className="text-base md:text-lg text-black/60 max-w-2xl">
-              On-Chain CRM and Incentive Engine that helps you identify high-value users,
-              predict their behavior, and retain them with surgical precision.
+
+            {/* Subtitle */}
+            <p
+              data-animate="fade-up"
+              className="text-lg md:text-xl text-black/60 max-w-2xl mb-8"
+            >
+              Campaigns end. Systems compound. Here&apos;s the infrastructure behind $3B+ in volume driven.
             </p>
-            <div data-animate="fade-up" className="flex flex-wrap items-center gap-4 mt-6">
-              <Button variant="accent" href="https://platform.torque.so/">
-                Launch Platform
-                <ArrowUpRight className="w-4 h-4 ml-2" />
+
+            {/* CTAs */}
+            <div
+              data-animate="fade-up"
+              className="flex flex-wrap items-center gap-4"
+            >
+              <Button
+                variant="accent"
+                onClick={() => setIsModalOpen(true)}
+                className="group"
+              >
+                Book a Demo
+                <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Button>
               <Button variant="outline" href="https://docs.torque.so/">
                 Documentation
@@ -90,9 +186,9 @@ export default function PlatformPage() {
         <div className="w-full px-6 md:px-12 lg:px-20 py-8 border-b border-black/10 bg-gray-50/50">
           <div className="flex flex-wrap items-center gap-8 md:gap-12">
             {[
-              { value: "100%", label: "Whitelabel" },
-              { value: "5min", label: "Integration" },
-              { value: "Real-time", label: "AI Optimization" },
+              { value: "5x", label: "ROI" },
+              { value: "$10M+", label: "Distributed" },
+              { value: "$3B+", label: "Volume Driven" },
             ].map((stat, index) => (
               <div key={index} data-animate="fade-up" className="flex items-baseline gap-2">
                 <span className="font-display text-xl font-semibold text-black">
@@ -104,7 +200,89 @@ export default function PlatformPage() {
           </div>
         </div>
 
+        {/* ================================================================= */}
+        {/* The 5 Operations — Condensed Overview */}
+        {/* ================================================================= */}
+        <section className="w-full px-6 md:px-12 lg:px-20 py-16 md:py-20 bg-gray-50/30 border-b border-black/10">
+          <div className="max-w-5xl mx-auto">
+            {/* Section Header */}
+            <div className="mb-10">
+              <div
+                data-animate="fade-up"
+                className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40"
+              >
+                <Rocket className="w-3 h-3" />
+                The System
+              </div>
+              <h2
+                data-animate="fade-up"
+                className="font-display text-xl sm:text-2xl font-medium text-black leading-[1.1] tracking-tight"
+              >
+                Five Operations. One Compounding Loop.
+              </h2>
+            </div>
+
+            {/* Operations Grid */}
+            <div className="border-t border-black/5">
+              {OPERATIONS.map((op) => {
+                const Icon = op.icon;
+                return (
+                  <div
+                    key={op.number}
+                    data-animate="fade-up"
+                    className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 py-5 border-b border-black/5 border-l-2 border-l-blue pl-5"
+                  >
+                    {/* Left: Number + Icon + Name + Description */}
+                    <div className="flex items-center gap-4 sm:min-w-[320px]">
+                      <div className="flex items-center gap-3 shrink-0">
+                        <span className="font-mono text-[10px] text-black/25 tracking-wider">
+                          {op.number}
+                        </span>
+                        <div className="w-7 h-7 rounded-[3px] bg-blue/10 flex items-center justify-center">
+                          <Icon className="w-3.5 h-3.5 text-blue" />
+                        </div>
+                      </div>
+                      <div>
+                        <span className="font-display text-sm font-semibold text-black">
+                          {op.name}
+                        </span>
+                        <span className="text-xs text-black/50 ml-2">
+                          {op.description}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Center: Primitive tags */}
+                    <div className="flex flex-wrap gap-1.5 sm:flex-1">
+                      {op.primitives.map((primitive) => (
+                        <span
+                          key={primitive}
+                          className="inline-flex items-center px-2 py-0.5 bg-blue/5 text-blue text-[10px] font-mono rounded-[3px]"
+                        >
+                          {primitive}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Right: Key stat */}
+                    <div className="sm:text-right sm:ml-auto shrink-0">
+                      <span className="font-display text-2xl sm:text-3xl font-medium text-black tracking-tight">
+                        {op.stat}
+                      </span>
+                      <span className="text-[10px] text-black/40 font-mono uppercase tracking-wider ml-2">
+                        {op.statLabel}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================= */}
         {/* Intelligence Section */}
+        {/* ================================================================= */}
         <FeatureSection
           icon={Brain}
           label="Torque Intelligence"
@@ -120,7 +298,7 @@ export default function PlatformPage() {
             {
               icon: Shield,
               title: "Sybil Protection",
-              description: "Identify wash traders and bot clusters. 15K+ sybils filtered and counting.",
+              description: "Filter wash traders and bots before you pay them. 15K+ caught.",
             },
             {
               icon: Gauge,
@@ -135,7 +313,9 @@ export default function PlatformPage() {
           ]}
         />
 
-        {/* Growth Mechanics Section */}
+        {/* ================================================================= */}
+        {/* Growth Engines Section */}
+        {/* ================================================================= */}
         <FeatureSection
           icon={Zap}
           label="Growth Engines"
@@ -146,12 +326,12 @@ export default function PlatformPage() {
             {
               icon: Code,
               title: "Conditional Incentives",
-              description: "Rewards that trigger on specific high-value actions—raffles, rebates, and transfers.",
+              description: "Rewards that trigger on specific high-value actions\u2014raffles, rebates, and transfers.",
             },
             {
               icon: Trophy,
               title: "Embedded Leaderboards",
-              description: "Real-time rankings that drive competition directly in your interface. 2.1x volume lift.",
+              description: "Real-time rankings that drive competition. $405 volume per $1 in rewards.",
             },
             {
               icon: Network,
@@ -166,7 +346,9 @@ export default function PlatformPage() {
           ]}
         />
 
-        {/* Integration Section */}
+        {/* ================================================================= */}
+        {/* Native Experience Section */}
+        {/* ================================================================= */}
         <FeatureSection
           icon={Layers}
           label="Native Experience"
@@ -197,7 +379,9 @@ export default function PlatformPage() {
           ]}
         />
 
+        {/* ================================================================= */}
         {/* How It Works */}
+        {/* ================================================================= */}
         <section className="w-full px-6 md:px-12 lg:px-20 py-16 md:py-20 border-t border-black/10">
           <div className="mb-12">
             <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40">
@@ -220,24 +404,56 @@ export default function PlatformPage() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="w-full px-6 md:px-12 lg:px-20 py-16 md:py-20 border-t border-black/10">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 data-animate="fade-up" className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mb-4">
-              Ready to embed growth into your protocol?
-            </h2>
-            <p data-animate="fade-up" className="text-base text-black/60 mb-6">
-              Join leading protocols using Torque to drive sustainable growth.
-            </p>
-            <div data-animate="fade-up" className="flex flex-wrap items-center justify-center gap-4">
-              <Button variant="accent" href="https://platform.torque.so/">
-                Get API Keys
-                <ArrowUpRight className="w-4 h-4 ml-2" />
-              </Button>
-              <Button variant="outline" href="https://docs.torque.so/">
-                Read Docs
-                <ArrowUpRight className="w-4 h-4 ml-2" />
-              </Button>
+        {/* ================================================================= */}
+        {/* Bottom CTA */}
+        {/* ================================================================= */}
+        <section className="w-full py-24 md:py-32 bg-white border-t border-black/10">
+          <div className="w-full px-6 md:px-12 lg:px-20">
+            <div className="max-w-3xl mx-auto text-center">
+              {/* Tag */}
+              <div
+                data-animate="fade-up"
+                className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]"
+              >
+                <Rocket className="w-3 h-3" />
+                <span>Get Started</span>
+              </div>
+
+              {/* Heading */}
+              <SplitText
+                tag="h2"
+                className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black leading-[1.1] tracking-tight mb-4"
+              >
+                <span>Ready to run your </span>
+                <span className="text-blue">first operation?</span>
+              </SplitText>
+
+              {/* Description */}
+              <p
+                data-animate="fade-up"
+                className="text-lg text-black/60 mb-8 max-w-xl mx-auto"
+              >
+                Talk to our team. First campaign live in under 24 hours.
+              </p>
+
+              {/* CTA Buttons */}
+              <div
+                data-animate="fade-up"
+                className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              >
+                <Button
+                  variant="accent"
+                  onClick={() => setIsModalOpen(true)}
+                  className="group"
+                >
+                  Book a Demo
+                  <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Button>
+                <Button variant="outline" href="https://docs.torque.so/">
+                  Read Docs
+                  <ArrowUpRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -245,6 +461,12 @@ export default function PlatformPage() {
 
       <div className="h-screen" />
       <Footer />
+
+      {/* Integration Request Modal */}
+      <IntegrationRequestModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }
@@ -279,19 +501,19 @@ function FeatureSection({
     <section
       className="group relative w-full px-6 md:px-12 lg:px-20 py-20 md:py-32 border-t border-black/10 overflow-hidden min-h-[600px] lg:min-h-[700px]"
     >
-      {/* Background Visual — always playing */}
+      {/* Background Visual */}
       {visual && (
         <div className="absolute inset-0 transition-opacity duration-700 opacity-50 group-hover:opacity-100">
-          <div className="relative w-full h-full">
-            {React.cloneElement(visual as React.ReactElement<Record<string, unknown>>, { paused: false, color: "#0008FF" })}
-          </div>
+          <CardVisualWrapper color="#0008FF" className="relative w-full h-full">
+            {visual}
+          </CardVisualWrapper>
         </div>
       )}
 
       {/* White gradient — top for header */}
-      <div className="absolute inset-x-0 top-0 h-[50%] bg-gradient-to-b from-white via-white/90 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-white via-white/80 to-transparent z-[1] pointer-events-none transition-opacity duration-500 group-hover:opacity-0" />
       {/* White gradient — bottom for features */}
-      <div className="absolute inset-x-0 bottom-0 h-[50%] bg-gradient-to-t from-white via-white/90 to-transparent z-[1] pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-white via-white/80 to-transparent z-[1] pointer-events-none transition-opacity duration-500 group-hover:opacity-0" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between min-h-[inherit]">

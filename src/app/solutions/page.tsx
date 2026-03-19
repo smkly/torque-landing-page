@@ -7,44 +7,55 @@ import Footer from "../components/Footer";
 import { Button } from "@/components/ui/button";
 import {
   ArrowUpRight,
-  CircleDot,
-  CreditCard,
-  TrendingUp,
-  Gem,
-  Sparkles,
-  Terminal,
+  Coins,
+  Repeat,
   Rocket,
+  Terminal,
+  TrendingUp,
+  Landmark,
+  Network,
 } from "lucide-react";
 import { ImageGradient } from "@/components/ascii/ImageGradient";
 import { CardVisualWrapper } from "@/components/card-visuals/CardVisualWrapper";
-import { VisualCard } from "@/components/card-visuals/VisualCard";
 import { SplitText } from "@/components/animations/SplitText";
 
 const IntegrationRequestModal = dynamic(
   () => import("../components/IntegrationRequestModal"),
   { ssr: false }
 );
-const UtilizationMeter = dynamic(
-  () => import("@/components/card-visuals/UtilizationMeter").then(mod => ({ default: mod.UtilizationMeter })),
+const RankOrbit = dynamic(
+  () => import("@/components/card-visuals/RankOrbit").then(mod => ({ default: mod.RankOrbit })),
   { ssr: false }
 );
 const StreakChain = dynamic(
   () => import("@/components/card-visuals/StreakChain").then(mod => ({ default: mod.StreakChain })),
   { ssr: false }
 );
-const DistributionWeb = dynamic(
-  () => import("@/components/card-visuals/DistributionWeb").then(mod => ({ default: mod.DistributionWeb })),
+const TrophyBurst = dynamic(
+  () => import("@/components/card-visuals/TrophyBurst").then(mod => ({ default: mod.TrophyBurst })),
   { ssr: false }
 );
-const DiamondHold = dynamic(
-  () => import("@/components/card-visuals/DiamondHold").then(mod => ({ default: mod.DiamondHold })),
+const VelocityFlow = dynamic(
+  () => import("@/components/card-visuals/VelocityFlow").then(mod => ({ default: mod.VelocityFlow })),
+  { ssr: false }
+);
+const DurationLock = dynamic(
+  () => import("@/components/card-visuals/DurationLock").then(mod => ({ default: mod.DurationLock })),
+  { ssr: false }
+);
+const AnchorLock = dynamic(
+  () => import("@/components/card-visuals/AnchorLock").then(mod => ({ default: mod.AnchorLock })),
+  { ssr: false }
+);
+const GrowthBars = dynamic(
+  () => import("@/components/card-visuals/GrowthBars").then(mod => ({ default: mod.GrowthBars })),
   { ssr: false }
 );
 const OddsMatrix = dynamic(
   () => import("@/components/card-visuals/OddsMatrix").then(mod => ({ default: mod.OddsMatrix })),
   { ssr: false }
 );
-const LoyaltyLayers = dynamic(
+const _LoyaltyLayers = dynamic(
   () => import("@/components/card-visuals/LoyaltyLayers").then(mod => ({ default: mod.LoyaltyLayers })),
   { ssr: false }
 );
@@ -74,159 +85,135 @@ interface Solution {
   };
 }
 
-interface AdditionalMarket {
+// Objective interface removed — now using ObjectiveGroup
+
+// =============================================================================
+// Data — Objectives with their vertical solution cards
+// =============================================================================
+interface ObjectiveGroup {
+  id: string;
+  label: string;
   icon: React.ComponentType<{ className?: string }>;
-  headline: string;
-  filename: string;
-  image: string;
-  problem: {
-    title: string;
-    description: string;
-  };
-  fix: {
-    title: string;
-    mechanics: string[];
-  };
+  keyStat: string;
+  keyStatLabel: string;
+  oneLiner: string;
+  primitives: string[];
+  solutions: Solution[];
 }
 
-// =============================================================================
-// Data
-// =============================================================================
-const solutions: Solution[] = [
+const objectiveGroups: ObjectiveGroup[] = [
   {
-    id: "lending",
-    sector: "Lending",
-    icon: CreditCard,
-    filename: "lending.strategy",
-    image: "/generated/image/light-mono/value-stack-light.jpg",
-    insight: {
-      title: "Targeted Liquidity Injection",
-      stat: "The Utilization Paradox (High TVL / Low Borrowing).",
-    },
-    problem: {
-      title: "The Utilization Paradox",
-      points: [
-        "Massive deposits sitting idle earning minimal yield",
-        "Borrowing is under-incentivized compared to lending",
-        "Capital efficiency is broken—TVL doesn't equal usage",
-      ],
-    },
-    fix: {
-      title: "Reward 'First-Time' LPs with duration-weighted bonuses.",
-      description:
-        "Targeted Liquidity Injection: instead of universal APY, we targeted new LPs with duration-weighted bonuses to prime the pump.",
-      mechanics: ["First-Time Deposit Bonus (5-10%)", "Duration-Weighted Rewards"],
-      result: "Highest Utilization Rate (53%)",
-    },
-  },
-  {
-    id: "perps",
-    sector: "Perps",
+    id: "trading-volume",
+    label: "Trading Volume",
     icon: TrendingUp,
-    filename: "perps.strategy",
-    image: "/generated/image/light-mono/network-nodes-light.jpg",
-    insight: {
-      title: "Habit Formation Architecture",
-      stat: "The 'One-and-Done' Trader (High Churn).",
-    },
-    problem: {
-      title: "The One-and-Done Trader",
-      points: [
-        "High volume metrics hide mercenary trading behavior",
-        "Users trade once for rewards, then disappear",
-        "Volume quality is ignored in favor of raw numbers",
-      ],
-    },
-    fix: {
-      title: "Incentivize 'Streaks' over raw volume.",
-      description:
-        "Habit Formation Architecture: we shifted incentives from raw volume to 'Streaks' to build habitual protocol usage.",
-      mechanics: ["Volume-Based Raffles", "Streak Bonuses"],
-      result: "+146% Net Retention",
-    },
+    keyStat: "$405",
+    keyStatLabel: "in volume per $1 on leaderboard rewards",
+    oneLiner: "Drive real trading activity — not rented volume that disappears when rewards stop.",
+    primitives: ["Leaderboards", "Raffles", "Rebates", "Streaks"],
+    solutions: [
+      {
+        id: "dexs",
+        sector: "DEXs",
+        icon: Repeat,
+        filename: "dex.strategy",
+        image: "/generated/image/light-mono/value-stack-light.jpg",
+        insight: { title: "Volume & Retention", stat: "$405 volume per $1 on leaderboard rewards." },
+        problem: { title: "Zero Switching Costs", points: ["Users route wherever fees are cheapest — zero loyalty", "Top 50 wallets drive 41% of daily volume on high-reward days", "Volume disappears when rewards stop"] },
+        fix: { title: "Layer leaderboards with raffles.", description: "Leaderboards concentrate whale volume ($405:$1). Raffles grow small traders — claimers increased volume 3x.", mechanics: ["Trader Leaderboards (ranked weekly)", "Daily & Weekly Raffles", "Creator Rebates"], result: "$6.50 fees per $1 in rewards" },
+      },
+      {
+        id: "terminals",
+        sector: "Trading Terminals",
+        icon: Terminal,
+        filename: "terminal.strategy",
+        image: "/generated/image/light-mono/network-nodes-light.jpg",
+        insight: { title: "Loyalty & Retention", stat: "9.4x more likely to become power users." },
+        problem: { title: "Mercenary Traders", points: ["Users trade once for the airdrop and ghost", "75% of traders are single-month mercenaries", "Volume disappears when rewards stop"] },
+        fix: { title: "Streaks and lotteries that reward consistency.", description: "Consecutive claims compound retention: 65% → 96% at 4 claims. Daily raffles increase small trader volume 8.5x.", mechanics: ["Streak Rewards", "Daily Raffles", "Embedded Leaderboards"], result: "96% retention at 4 claims" },
+      },
+      {
+        id: "perps",
+        sector: "Perps",
+        icon: TrendingUp,
+        filename: "perps.strategy",
+        image: "/generated/image/light-mono/network-nodes-light.jpg",
+        insight: { title: "Quality Over Quantity", stat: "+130% daily volume during campaign." },
+        problem: { title: "One-and-Done Traders", points: ["High volume masks mercenary behavior", "Users trade once for rewards then disappear", "No distinction between quality and junk volume"] },
+        fix: { title: "Reward trading quality, not just size.", description: "Leaderboards ranked by PnL or consistency, not raw volume. Hold-time requirements filter wash trading.", mechanics: ["PnL Leaderboards", "Hold-Time Requirements", "Volume-Based Raffles"], result: "+77% unique traders" },
+      },
+    ],
   },
   {
-    id: "stablecoins",
-    sector: "Stablecoins",
-    icon: CircleDot,
-    filename: "stablecoin.strategy",
-    image: "/generated/image/light-mono/floating-mass-01.jpg",
-    insight: {
-      title: "Distribution Nodes",
-      stat: "The Velocity Gap ($175M+ Cap / 0 Velocity).",
-    },
-    problem: {
-      title: "The Velocity Gap",
-      points: [
-        "Stablecoins sit idle in wallets instead of circulating",
-        "High market cap creates false sense of adoption",
-        "No incentive for holders to actually use the asset",
-      ],
-    },
-    fix: {
-      title: "Turn passive holders into active transaction agents.",
-      description:
-        "Distribution Nodes: use referral rebates to turn passive holders into active transaction agents.",
-      mechanics: ["Referral Rebate (0.1% of volume)", "Looping Bonus (Leverage > 3x)"],
-      result: "+40% Velocity Increase",
-    },
-  },
-];
-
-const additionalMarkets: AdditionalMarket[] = [
-  {
-    icon: Gem,
-    headline: "Memecoins & Communities",
-    filename: "memecoin.strategy",
-    image: "/generated/image/light-mono/data-particles.jpg",
-    problem: {
-      title: "The PvP Rotator Trap",
-      description:
-        "Users buy, pump, and dump within hours. Liquidity is mercenary, and communities churn faster than they form.",
-    },
-    fix: {
-      title: '"Diamond Hand" Rewards',
-      mechanics: [
-        "Time-Weighted Incentives: Reward users who hold for 7+ days",
-        "Raid-to-Earn: Link on-chain payouts to Social Graph engagement",
-      ],
-    },
+    id: "capital",
+    label: "Capital",
+    icon: Landmark,
+    keyStat: "387x",
+    keyStatLabel: "volume per rebate dollar",
+    oneLiner: "Grow deposits, liquidity, and token holdings with sustainable incentives.",
+    primitives: ["Dynamic Rebates", "Gifts", "Milestones", "Referrals"],
+    solutions: [
+      {
+        id: "tokens",
+        sector: "Tokens & Stablecoins",
+        icon: Coins,
+        filename: "token.strategy",
+        image: "/generated/image/light-mono/floating-mass-01.jpg",
+        insight: { title: "Velocity & Distribution", stat: "$625M volume driven. 165K participants." },
+        problem: { title: "Dead Liquidity", points: ["High market cap, zero velocity — tokens sit in wallets", "No incentive for holders to transact", "Distribution relies on market makers, not organic activity"] },
+        fix: { title: "Dynamic rebates that scale with activity.", description: "Proportional daily rebates with onchain settlement. Higher volume = lower bips. Self-regulating.", mechanics: ["Dynamic Rebates (proportional daily)", "Looping Bonuses (leverage incentives)", "Spend Rewards"], result: "387x volume per rebate dollar" },
+      },
+      {
+        id: "lending",
+        sector: "Lending",
+        icon: Landmark,
+        filename: "lending.strategy",
+        image: "/generated/image/light-mono/value-stack-light.jpg",
+        insight: { title: "Utilization & Deposits", stat: "Duration-weighted bonuses drive sticky capital." },
+        problem: { title: "Idle Capital", points: ["Massive deposits earning minimal yield", "Borrowing under-incentivized vs lending", "TVL doesn't translate to usage"] },
+        fix: { title: "Reward duration, not just deposits.", description: "Target new LPs with duration-weighted bonuses. Longer holds = higher multipliers.", mechanics: ["Duration-Weighted Deposit Bonuses", "Borrower Activation Rewards", "Loyalty Multipliers"], result: "Sticky capital, not mercenary TVL" },
+      },
+      {
+        id: "staking",
+        sector: "Staking & Validators",
+        icon: Landmark,
+        filename: "staking.strategy",
+        image: "/generated/image/light-mono/floating-mass-01.jpg",
+        insight: { title: "Long-Term Alignment", stat: "Hold rewards scale with commitment." },
+        problem: { title: "Stake & Forget", points: ["Stakers park tokens and never engage further", "No incentive to participate in governance or ecosystem", "Validator selection driven by APY alone"] },
+        fix: { title: "Reward active staking, not passive holding.", description: "Milestone unlocks for staking duration. Cross-ecosystem engagement multipliers for governance participation.", mechanics: ["Duration-Based Hold Rewards", "Milestone Unlocks", "Governance Participation Bonuses"], result: "Active stakers, not passive holders" },
+      },
+    ],
   },
   {
-    icon: Sparkles,
-    headline: "Prediction Markets",
-    filename: "prediction.strategy",
-    image: "/generated/image/light-mono/network-pulse-light.jpg",
-    problem: {
-      title: "Event-Driven Churn",
-      description:
-        "Users bet on a single major event and then leave the protocol entirely once it settles.",
-    },
-    fix: {
-      title: "Cross-Category Streaks",
-      mechanics: [
-        "Streak Leaderboards: Require betting on 3 different categories to unlock multipliers",
-        "Consolation Rebates: Auto-refund a % of fees to high-volume users who lose",
-      ],
-    },
-  },
-  {
-    icon: Terminal,
-    headline: "Terminals & Aggregators",
-    filename: "terminal.strategy",
-    image: "/generated/image/light-mono/blocks-chain-light.jpg",
-    problem: {
-      title: "Interface Commoditization",
-      description:
-        "Users switch terminals based on whichever has the lowest fees or fastest execution. Zero loyalty.",
-    },
-    fix: {
-      title: "Embedded Loyalty Layer",
-      mechanics: [
-        "Native XP System: Rewards cumulative volume routed through your terminal",
-        "Fee Rebates: Refund gas costs in your native token",
-      ],
-    },
+    id: "ecosystem",
+    label: "Ecosystem",
+    icon: Network,
+    keyStat: "6x",
+    keyStatLabel: "increase in token launches",
+    oneLiner: "Incentivize the supply side — token launches, market creation, and cross-protocol activity.",
+    primitives: ["Creator Rebates", "Breadth Multipliers", "Milestones", "Leaderboards"],
+    solutions: [
+      {
+        id: "launchpads",
+        sector: "Launchpads",
+        icon: Rocket,
+        filename: "launchpad.strategy",
+        image: "/generated/image/light-mono/data-particles.jpg",
+        insight: { title: "Participation & Breadth", stat: "95.7% of users only participate in a single launch." },
+        problem: { title: "One-and-Done Participation", points: ["Users deposit for one launch and never return", "Whale concentration — 4.8% of wallets hold 59.4% of SOL", "No incentive to participate across multiple launches"] },
+        fix: { title: "Breadth multipliers and time-weighted leaderboards.", description: "Escalating multipliers (up to 3x for 5+ launches). Time-weighted deposits shift 81% of volume to first 24 hours.", mechanics: ["Breadth Multipliers (1x → 3x)", "Time-Weighted Leaderboards", "Milestone Unlocks (retroactive)"], result: "6x creator activity increase" },
+      },
+      {
+        id: "prediction",
+        sector: "Prediction Markets",
+        icon: Network,
+        filename: "prediction.strategy",
+        image: "/generated/image/light-mono/network-nodes-light.jpg",
+        insight: { title: "Cross-Category Engagement", stat: "Users bet on one event and leave." },
+        problem: { title: "Event-Driven Churn", points: ["Users bet on a single event then exit entirely", "Market creation is under-incentivized", "No progression between categories"] },
+        fix: { title: "Cross-category streaks and market creation rewards.", description: "Require activity across multiple categories to unlock multipliers. Reward market creators for liquidity depth.", mechanics: ["Cross-Category Streak Multipliers", "Market Creation Rebates", "Consolation Rebates (fee refunds for active losers)"], result: "Sustained engagement across events" },
+      },
+    ],
   },
 ];
 
@@ -244,29 +231,41 @@ export default function SolutionsPage() {
         {/* Page Header */}
         <header className="w-full px-6 md:px-12 lg:px-20 pb-12 md:pb-16 border-b border-black/10">
           <div className="max-w-4xl">
-            <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-wider text-black/40">
+            <div
+              data-animate="fade-up"
+              className="inline-flex items-center gap-2 mb-4 font-mono text-[10px] uppercase tracking-wider text-black/40"
+            >
               <span className="w-1 h-1 bg-blue rounded-full" />
               Solutions
             </div>
-            <h1 data-animate="fade-up" className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] tracking-tight mb-4">
-              Engineering Protocol Equilibrium
+            <h1
+              data-animate="fade-up"
+              className="font-display text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] tracking-tight mb-4"
+            >
+              Grow Your Core Metrics
             </h1>
-            <p data-animate="fade-up" className="text-base md:text-lg text-black/60 max-w-2xl mb-6">
-              Every sector has a systemic flaw. Torque provides the diagnostics to find the leak and the primitives to fix it.
+            <p
+              data-animate="fade-up"
+              className="text-base md:text-lg text-black/60 max-w-2xl mb-6"
+            >
+              Every incentive maps to one objective. Volume, capital, or ecosystem — pick yours and see the playbook.
             </p>
 
-            {/* Quick Nav */}
-            <div data-animate="fade-up" className="flex flex-wrap items-center gap-2">
-              {solutions.map((solution) => {
-                const Icon = solution.icon;
+            {/* Quick Nav — Objectives */}
+            <div
+              data-animate="fade-up"
+              className="flex flex-wrap items-center gap-2"
+            >
+              {objectiveGroups.map((group) => {
+                const Icon = group.icon;
                 return (
                   <a
-                    key={solution.id}
-                    href={`#${solution.id}`}
+                    key={group.id}
+                    href={`#${group.id}`}
                     className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[3px] border border-black/10 hover:border-black/20 transition-colors font-mono text-[10px] uppercase tracking-wider text-black/50 hover:text-black"
                   >
                     <Icon className="w-3 h-3 group-hover:text-blue transition-colors" />
-                    {solution.sector}
+                    {group.label}
                   </a>
                 );
               })}
@@ -274,11 +273,10 @@ export default function SolutionsPage() {
           </div>
         </header>
 
-        {/* Solutions Section */}
-        <SolutionsGrid />
-
-        {/* Additional Markets */}
-        <AdditionalMarketsSection />
+        {/* Objective Sections with embedded vertical cards */}
+        {objectiveGroups.map((group, idx) => (
+          <ObjectiveSection key={group.id} group={group} index={idx} />
+        ))}
 
         {/* CTA Section */}
         <SolutionsCTA onOpenModal={() => setIsModalOpen(true)} />
@@ -297,43 +295,62 @@ export default function SolutionsPage() {
 }
 
 // =============================================================================
-// Solutions Grid
+// Objective Section — contains vertical cards
 // =============================================================================
-function SolutionsGrid() {
+interface ObjectiveSectionProps {
+  group: ObjectiveGroup;
+  index: number;
+}
+
+function ObjectiveSection({ group, index }: ObjectiveSectionProps) {
+  const Icon = group.icon;
+  const isAlt = index % 2 === 1;
+  const [activeIdx, setActiveIdx] = useState(0);
+
   return (
-    <section className="w-full bg-white border-t border-black/10">
-      <div className="w-full px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
-          <div>
-            <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
-              <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
-              <span>Core Solutions</span>
-            </div>
-
-            <SplitText tag="h2" className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              <span>Battle-tested mechanical</span>
-              <span className="text-black/40">modules</span>
-            </SplitText>
-
-            <p data-animate="fade-up" className="text-lg md:text-xl text-black/60 max-w-2xl">
-              Each solution comes with diagnosis, mechanical logic, and proven results.
-            </p>
+    <section
+      id={group.id}
+      className={`w-full border-b border-black/10 ${isAlt ? "bg-black/[0.015]" : "bg-white"}`}
+    >
+      <div className="w-full px-6 md:px-12 lg:px-20 py-16 md:py-24">
+        {/* Objective Header */}
+        <div className="mb-8">
+          <div
+            data-animate="fade-up"
+            className="inline-flex items-center gap-2 mb-4 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]"
+          >
+            <Icon className="w-3.5 h-3.5 text-blue" />
+            <span>{group.label}</span>
           </div>
-          <div data-animate="fade-up">
-            <Button variant="outline" href="/primitives" className="w-fit">
-              Explore Primitives
-              <ArrowUpRight className="w-4 h-4 ml-2" />
-            </Button>
+
+          <p data-animate="fade-up" className="text-base md:text-lg text-black/60 max-w-2xl mb-6">
+            {group.oneLiner}
+          </p>
+
+          {/* Vertical Type Selector */}
+          <div data-animate="fade-up" className="flex flex-wrap gap-2">
+            {group.solutions.map((solution, idx) => {
+              const SolIcon = solution.icon;
+              return (
+                <button
+                  key={solution.id}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-[3px] font-mono text-xs uppercase tracking-wider transition-all duration-200 ${
+                    activeIdx === idx
+                      ? "bg-blue text-white border border-blue"
+                      : "text-black/50 border border-black/10 hover:border-black/20 hover:text-black"
+                  }`}
+                >
+                  <SolIcon className="w-3.5 h-3.5" />
+                  {solution.sector}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Solutions */}
-        <div className="space-y-8">
-          {solutions.map((solution) => (
-            <SolutionCard key={solution.id} solution={solution} />
-          ))}
-        </div>
+        {/* Active Solution Card */}
+        <SolutionCard solution={group.solutions[activeIdx]} />
       </div>
     </section>
   );
@@ -343,9 +360,14 @@ function SolutionsGrid() {
 // Solution Card
 // =============================================================================
 const solutionVisuals: Record<string, React.ReactElement> = {
-  lending: <UtilizationMeter color="#0008FF" />,
-  perps: <StreakChain color="#0008FF" />,
-  stablecoins: <DistributionWeb color="#0008FF" />,
+  dexs: <RankOrbit color="#0008FF" competitorCount={6} />,
+  terminals: <StreakChain color="#0008FF" />,
+  perps: <TrophyBurst color="#0008FF" />,
+  tokens: <VelocityFlow color="#0008FF" />,
+  lending: <DurationLock color="#0008FF" />,
+  staking: <AnchorLock color="#0008FF" />,
+  launchpads: <GrowthBars color="#0008FF" />,
+  prediction: <OddsMatrix color="#0008FF" />,
 };
 
 interface SolutionCardProps {
@@ -354,7 +376,6 @@ interface SolutionCardProps {
 
 function SolutionCard({ solution }: SolutionCardProps) {
   const Icon = solution.icon;
-  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
@@ -400,7 +421,10 @@ function SolutionCard({ solution }: SolutionCardProps) {
               </h5>
               <ul className="space-y-1.5">
                 {solution.problem.points.map((point, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-black/60">
+                  <li
+                    key={i}
+                    className="flex items-start gap-2 text-sm text-black/60"
+                  >
                     <span className="w-1 h-1 bg-black/30 rounded-full mt-2 flex-shrink-0" />
                     {point}
                   </li>
@@ -416,7 +440,9 @@ function SolutionCard({ solution }: SolutionCardProps) {
               <h5 className="text-sm font-display font-medium text-black mb-1">
                 {solution.fix.title}
               </h5>
-              <p className="text-sm text-black/60 mb-3">{solution.fix.description}</p>
+              <p className="text-sm text-black/60 mb-3">
+                {solution.fix.description}
+              </p>
 
               {/* Mechanics */}
               <div className="pt-3 border-t border-black/10">
@@ -425,7 +451,10 @@ function SolutionCard({ solution }: SolutionCardProps) {
                 </span>
                 <ul className="space-y-1 mb-3">
                   {solution.fix.mechanics.map((mechanic, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-black">
+                    <li
+                      key={i}
+                      className="flex items-start gap-2 text-sm text-black"
+                    >
                       <span className="text-blue mt-0.5">+</span>
                       {mechanic}
                     </li>
@@ -444,7 +473,8 @@ function SolutionCard({ solution }: SolutionCardProps) {
           {/* CTA */}
           <div className="mt-6 pt-5 border-t border-black/10 flex items-center justify-between">
             <span className="text-sm text-black/40">
-              See how we implemented this for {solution.sector.toLowerCase()} protocols
+              See how we implemented this for{" "}
+              {solution.sector.toLowerCase()} protocols
             </span>
             <Button variant="outline" size="sm" href="/playbooks">
               View Playbook
@@ -458,7 +488,10 @@ function SolutionCard({ solution }: SolutionCardProps) {
           {/* Procedural visual */}
           {solutionVisuals[solution.id] && (
             <div className="absolute inset-0 opacity-50 group-hover:opacity-100 transition-opacity duration-500">
-              <CardVisualWrapper color="#0008FF" className="relative w-full h-full">
+              <CardVisualWrapper
+                color="#0008FF"
+                className="relative w-full h-full"
+              >
                 {solutionVisuals[solution.id]}
               </CardVisualWrapper>
             </div>
@@ -469,110 +502,12 @@ function SolutionCard({ solution }: SolutionCardProps) {
           {/* Terminal Header */}
           <div className="absolute top-0 left-0 right-0 flex items-center gap-1.5 px-4 py-2 z-10">
             <span className="w-1.5 h-1.5 rounded-full bg-black/20" />
-            <span className="font-mono text-[9px] text-black/30">{solution.filename}</span>
+            <span className="font-mono text-[9px] text-black/30">
+              {solution.filename}
+            </span>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-// =============================================================================
-// Additional Markets Section
-// =============================================================================
-function AdditionalMarketsSection() {
-  return (
-    <section className="w-full bg-white border-t border-black/10">
-      <div className="w-full px-6 md:px-12 lg:px-20 py-20 md:py-32">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
-          <div>
-            <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]">
-              <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
-              <span>More Sectors</span>
-            </div>
-
-            <SplitText tag="h2" className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              <span>Also optimized</span>
-              <span className="text-black/40">for high-velocity markets</span>
-            </SplitText>
-
-            <p data-animate="fade-up" className="text-lg md:text-xl text-black/60 max-w-2xl">
-              Torque primitives are sector-agnostic. We support the highest-velocity economies on
-              Solana.
-            </p>
-          </div>
-        </div>
-
-        {/* Markets Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
-          {additionalMarkets.map((market, index) => (
-            <MarketCard key={index} market={market} index={index} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// =============================================================================
-// Market Card
-// =============================================================================
-const marketVisuals = [
-  <DiamondHold key="diamond" color="#0008FF" />,
-  <OddsMatrix key="odds" color="#0008FF" />,
-  <LoyaltyLayers key="loyalty" color="#0008FF" />,
-];
-
-interface MarketCardProps {
-  market: AdditionalMarket;
-  index: number;
-}
-
-function MarketCard({ market, index }: MarketCardProps) {
-  const Icon = market.icon;
-  return (
-    <div data-animate="fade-up">
-      <VisualCard
-        visual={marketVisuals[index]}
-        filename={market.filename}
-        layout="adaptive"
-        visualFill="full"
-        className="border-black/5 hover:border-black/15"
-      >
-        {/* Icon */}
-        <div className="relative w-10 h-10 rounded-[3px] bg-white/80 backdrop-blur-sm flex items-center justify-center mb-3 group-hover:bg-blue/10 transition-colors">
-          <Icon className="w-5 h-5 text-black group-hover:text-blue transition-colors" />
-        </div>
-
-        {/* Title */}
-        <h3 className="relative font-display text-lg font-medium text-black mb-4 group-hover:text-blue transition-colors">
-          {market.headline}
-        </h3>
-
-        {/* Problem */}
-        <div className="relative mb-4 p-3 bg-white/60 backdrop-blur-sm rounded-[3px] border-l-2 border-black/20">
-          <span className="text-[9px] font-mono uppercase tracking-wider text-black/40 block mb-1">
-            The Problem: {market.problem.title}
-          </span>
-          <p className="text-xs text-black/70 leading-relaxed">{market.problem.description}</p>
-        </div>
-
-        {/* Fix */}
-        <div className="relative p-3 bg-white/60 backdrop-blur-sm rounded-[3px] border-l-2 border-blue">
-          <span className="text-[9px] font-mono uppercase tracking-wider text-blue block mb-1">
-            The Fix: {market.fix.title}
-          </span>
-          <ul className="space-y-1">
-            {market.fix.mechanics.map((mechanic, i) => (
-              <li key={i} className="flex items-start gap-1.5 text-xs text-black/80">
-                <span className="text-blue mt-0.5">+</span>
-                {mechanic}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </VisualCard>
     </div>
   );
 }
@@ -588,18 +523,31 @@ function SolutionsCTA({ onOpenModal }: SolutionsCTAProps) {
   return (
     <section className="w-full px-6 md:px-12 lg:px-20 py-20 md:py-28 bg-white border-t border-black/10">
       <div className="max-w-xl mx-auto text-center">
-        <div data-animate="fade-up" className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40">
+        <div
+          data-animate="fade-up"
+          className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40"
+        >
           <Rocket className="w-3 h-3" />
           Deploy Now
         </div>
-        <SplitText tag="h2" className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mb-4">
+        <SplitText
+          tag="h2"
+          className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mb-4"
+        >
           <span>Ready to engineer</span>
           <span className="text-black/40">protocol equilibrium?</span>
         </SplitText>
-        <p data-animate="fade-up" className="text-base text-black/60 mb-6">
-          Torque exists to replace &ldquo;vibes-based&rdquo; marketing with deterministic, programmable ROI. No waste. Just growth.
+        <p
+          data-animate="fade-up"
+          className="text-base text-black/60 mb-6"
+        >
+          Torque exists to replace &ldquo;vibes-based&rdquo; marketing with
+          deterministic, programmable ROI. No waste. Just growth.
         </p>
-        <div data-animate="fade-up" className="flex flex-wrap items-center justify-center gap-4">
+        <div
+          data-animate="fade-up"
+          className="flex flex-wrap items-center justify-center gap-4"
+        >
           <Button variant="accent" onClick={onOpenModal}>
             Deploy Logic
             <ArrowUpRight className="w-4 h-4 ml-2" />

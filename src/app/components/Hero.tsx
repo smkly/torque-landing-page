@@ -102,24 +102,18 @@ const Hero = () => {
         );
       }
 
-      // 5. Stats — hidden on load, revealed on first scroll (staggered)
+      // 5. Stats — load at same time as buttons (1.3s)
       if (statsRef.current) {
         const statEls = Array.from(statsRef.current.children);
         gsap.set(statEls, { opacity: 0, y: 25 });
 
-        const onFirstScroll = () => {
-          if (window.scrollY > 50) {
-            gsap.to(statEls, {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.2,
-              ease: "power3.out",
-            });
-            window.removeEventListener("scroll", onFirstScroll);
-          }
-        };
-        window.addEventListener("scroll", onFirstScroll, { passive: true });
+        tl.to(statEls, {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.15,
+          ease: "power3.out",
+        }, 1.3);
       }
 
       // 6. Scroll hint — fade in, then hide on scroll
@@ -154,9 +148,10 @@ const Hero = () => {
         <div className="absolute inset-0 z-0">
           <InteractiveGradient />
 
-          {/* ASCII Helicoid — right side only so it doesn't overlap text */}
-          <div className="absolute inset-y-0 right-0 w-[60%] hidden lg:block">
+          {/* ASCII Helicoid — top 40% on mobile with fade, full viewport on desktop */}
+          <div className="absolute inset-x-0 top-0 h-[40%] md:h-full md:inset-0 overflow-hidden">
             <TorqueHelicoid />
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none md:hidden" />
           </div>
 
           {/* Bottom fade — soft transition to white content */}

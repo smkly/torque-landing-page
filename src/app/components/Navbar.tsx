@@ -96,6 +96,7 @@ export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [bannerHidden, setBannerHidden] = useState(false);
   const symbolRef = useRef<HTMLImageElement>(null);
   const pathname = usePathname();
   const isHome = pathname === "/";
@@ -114,6 +115,7 @@ export default function Navbar() {
           // Fade in bg over first 200px of scroll (homepage only)
           if (isHome) {
             setBgOpacity(Math.min(1, window.scrollY / 200));
+            setBannerHidden(window.scrollY > 50);
           }
           // Hide navbar when scrolled into the footer reveal zone
           const distanceFromBottom =
@@ -148,7 +150,7 @@ export default function Navbar() {
       <GlassFilterSVG />
 
       <header
-        className="fixed top-4 left-1/2 z-[1000] w-[calc(100%-3rem)] md:w-[calc(100%-4rem)] lg:w-[calc(100%-6rem)] transition-transform duration-500 ease-in-out"
+        className={`fixed left-1/2 z-[1000] w-[calc(100%-3rem)] md:w-[calc(100%-4rem)] lg:w-[calc(100%-6rem)] transition-all duration-300 ease-in-out ${bannerHidden ? "top-4" : "top-12"}`}
         style={{
           transform: isFooterVisible
             ? "translateX(-50%) translateY(-120%)"
