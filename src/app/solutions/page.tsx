@@ -85,10 +85,10 @@ interface Solution {
   };
 }
 
-// Objective interface removed — now using ObjectiveGroup
+// Objective interface removed, now using ObjectiveGroup
 
 // =============================================================================
-// Data — Objectives with their vertical solution cards
+// Data: Objectives with their vertical solution cards
 // =============================================================================
 interface ObjectiveGroup {
   id: string;
@@ -108,7 +108,7 @@ const objectiveGroups: ObjectiveGroup[] = [
     icon: TrendingUp,
     keyStat: "$405",
     keyStatLabel: "in volume per $1 on leaderboard rewards",
-    oneLiner: "Drive real trading activity — not rented volume that disappears when rewards stop.",
+    oneLiner: "Drive real trading activity, not rented volume that disappears when rewards stop.",
     primitives: ["Leaderboards", "Raffles", "Rebates", "Streaks"],
     solutions: [
       {
@@ -118,8 +118,8 @@ const objectiveGroups: ObjectiveGroup[] = [
         filename: "dex.strategy",
         image: "/generated/image/light-mono/value-stack-light.jpg",
         insight: { title: "Volume & Retention", stat: "$405 volume per $1 on leaderboard rewards." },
-        problem: { title: "Zero Switching Costs", points: ["Users route wherever fees are cheapest — zero loyalty", "Top 50 wallets drive 41% of daily volume on high-reward days", "Volume disappears when rewards stop"] },
-        fix: { title: "Layer leaderboards with raffles.", description: "Leaderboards concentrate whale volume ($405:$1). Raffles grow small traders — claimers increased volume 3x.", mechanics: ["Trader Leaderboards (ranked weekly)", "Daily & Weekly Raffles", "Creator Rebates"], result: "$6.50 fees per $1 in rewards" },
+        problem: { title: "Zero Switching Costs", points: ["Users route wherever fees are cheapest, zero loyalty", "Top 50 wallets drive 41% of daily volume on high-reward days", "Volume disappears when rewards stop"] },
+        fix: { title: "Layer leaderboards with raffles.", description: "Leaderboards concentrate whale volume ($405:$1). Raffles grow small traders, claimers increased volume 3x.", mechanics: ["Trader Leaderboards (ranked weekly)", "Daily & Weekly Raffles", "Creator Rebates"], result: "$405 volume per $1 spent" },
       },
       {
         id: "terminals",
@@ -159,7 +159,7 @@ const objectiveGroups: ObjectiveGroup[] = [
         filename: "token.strategy",
         image: "/generated/image/light-mono/floating-mass-01.jpg",
         insight: { title: "Velocity & Distribution", stat: "$625M volume driven. 165K participants." },
-        problem: { title: "Dead Liquidity", points: ["High market cap, zero velocity — tokens sit in wallets", "No incentive for holders to transact", "Distribution relies on market makers, not organic activity"] },
+        problem: { title: "Dead Liquidity", points: ["High market cap, zero velocity, tokens sit in wallets", "No incentive for holders to transact", "Distribution relies on market makers, not organic activity"] },
         fix: { title: "Dynamic rebates that scale with activity.", description: "Proportional daily rebates with onchain settlement. Higher volume = lower bips. Self-regulating.", mechanics: ["Dynamic Rebates (proportional daily)", "Looping Bonuses (leverage incentives)", "Spend Rewards"], result: "387x volume per rebate dollar" },
       },
       {
@@ -190,7 +190,7 @@ const objectiveGroups: ObjectiveGroup[] = [
     icon: Network,
     keyStat: "6x",
     keyStatLabel: "increase in token launches",
-    oneLiner: "Incentivize the supply side — token launches, market creation, and cross-protocol activity.",
+    oneLiner: "Incentivize the supply side: token launches, market creation, and cross-protocol activity.",
     primitives: ["Creator Rebates", "Breadth Multipliers", "Milestones", "Leaderboards"],
     solutions: [
       {
@@ -200,7 +200,7 @@ const objectiveGroups: ObjectiveGroup[] = [
         filename: "launchpad.strategy",
         image: "/generated/image/light-mono/data-particles.jpg",
         insight: { title: "Participation & Breadth", stat: "95.7% of users only participate in a single launch." },
-        problem: { title: "One-and-Done Participation", points: ["Users deposit for one launch and never return", "Whale concentration — 4.8% of wallets hold 59.4% of SOL", "No incentive to participate across multiple launches"] },
+        problem: { title: "One-and-Done Participation", points: ["Users deposit for one launch and never return", "Whale concentration: 4.8% of wallets hold 59.4% of SOL", "No incentive to participate across multiple launches"] },
         fix: { title: "Breadth multipliers and time-weighted leaderboards.", description: "Escalating multipliers (up to 3x for 5+ launches). Time-weighted deposits shift 81% of volume to first 24 hours.", mechanics: ["Breadth Multipliers (1x → 3x)", "Time-Weighted Leaderboards", "Milestone Unlocks (retroactive)"], result: "6x creator activity increase" },
       },
       {
@@ -248,10 +248,10 @@ export default function SolutionsPage() {
               data-animate="fade-up"
               className="text-base md:text-lg text-black/60 max-w-2xl mb-6"
             >
-              Every incentive maps to one objective. Volume, capital, or ecosystem — pick yours and see the playbook.
+              Every incentive maps to one objective. Volume, capital, or ecosystem. Pick yours and see the playbook.
             </p>
 
-            {/* Quick Nav — Objectives */}
+            {/* Quick Nav: Objectives */}
             <div
               data-animate="fade-up"
               className="flex flex-wrap items-center gap-2"
@@ -295,7 +295,7 @@ export default function SolutionsPage() {
 }
 
 // =============================================================================
-// Objective Section — contains vertical cards
+// Objective Section: contains vertical cards
 // =============================================================================
 interface ObjectiveSectionProps {
   group: ObjectiveGroup;
