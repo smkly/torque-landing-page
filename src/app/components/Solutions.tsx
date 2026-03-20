@@ -87,12 +87,12 @@ export default function Solutions() {
             </div>
 
             <SplitText tag="h2" className="text-2xl sm:text-3xl lg:text-4xl font-display font-medium text-black mb-6 max-w-4xl leading-[1.1] tracking-tight">
-              <span>Every Protocol Has</span>
+              <span>Your Protocol Has</span>
               <span className="text-black/40">a Leaky Bucket</span>
             </SplitText>
 
             <p data-animate="fade-up" className="text-lg md:text-xl text-black/60 max-w-2xl">
-              You already know where users drop off. Now do something about it.
+              You know where users drop off. Fix it.
             </p>
           </div>
           <div data-animate="fade-up">
@@ -112,8 +112,8 @@ export default function Solutions() {
               subtitle="Mercenary Trader Problem"
               filename="trading.strategy"
               visual={RetentionLoop}
-              diagnosis="Users trade once for the airdrop and ghost. Rented volume."
-              fix="Streaks, lotteries, and loyalty that reward consistency over size."
+              diagnosis="Users trade once for the airdrop and ghost, leaving you with rented volume."
+              fix="Streaks and lotteries that reward consistency over size."
             />
           </div>
           <div data-animate="fade-up">
@@ -123,8 +123,8 @@ export default function Solutions() {
               subtitle="Zero Switching Cost Problem"
               filename="dex.strategy"
               visual={LiquidityPool}
-              diagnosis="Users route wherever fees are cheapest. Zero loyalty, zero stickiness."
-              fix="Leaderboards, referrals, and raffles that give users a reason to stay."
+              diagnosis="Users route wherever fees are cheapest and leave the moment a better rate appears."
+              fix="Leaderboards and referrals that give users a reason to stay."
             />
           </div>
           <div data-animate="fade-up">
@@ -136,7 +136,7 @@ export default function Solutions() {
               visual={VelocityFlow}
               visualFill="full"
               diagnosis="High market cap, zero velocity. Your token sits in wallets doing nothing."
-              fix="Referral rebates and spend rewards that turn holders into active users."
+              fix="Referral rebates and spend rewards that push holders to transact."
             />
           </div>
         </div>

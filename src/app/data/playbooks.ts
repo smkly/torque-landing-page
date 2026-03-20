@@ -26,7 +26,7 @@ export const featuredPlaybooks: Playbook[] = [
     title: "Winners Arc",
     sector: "Multi-Protocol",
     description:
-      "$204M in volume. 5x ROI. Daily leaderboard across Axiom, WLFI, and Raydium.",
+      "$204M in volume at 5x ROI. Daily leaderboard across Axiom, WLFI, and Raydium.",
     metricBadge: "5x ROI",
     icon: Trophy,
     visualType: "network",
@@ -38,7 +38,7 @@ export const featuredPlaybooks: Playbook[] = [
     title: "Dynamic Rebates",
     sector: "DEX",
     description:
-      "$625M in volume. 165K participants. Proportional daily rebates that scale with activity.",
+      "$625M in volume from 165K participants. Proportional daily rebates that scale with activity.",
     formula: {
       trigger: "Daily Trading Volume",
       condition: "Proportional Allocation",
@@ -55,7 +55,7 @@ export const featuredPlaybooks: Playbook[] = [
     title: "Power User Conversion",
     sector: "Retention",
     description:
-      "Reward claimers are 9.4x more likely to become power users. Incentives don't just acquire — they transform behavior.",
+      "Reward claimers are 9.4x more likely to become power users.",
     metricBadge: "9.4x Conversion",
     icon: Users,
     visualType: "growth",

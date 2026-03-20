@@ -15,7 +15,7 @@ export const heroRotatingPhrases = [
   "Real Users",
   "Zero Waste",
   "Sybil-Free Growth",
-  "Proven Results",
+  "Measured ROI",
 ];
 
 // Scramble character sets

@@ -195,7 +195,7 @@ const Hero = () => {
                   className="text-lg md:text-xl text-black/60 mb-8 leading-relaxed"
                   style={{ opacity: 0 }}
                 >
-                  Incentive infrastructure for onchain protocols and tokens. Launch today. Measure tomorrow. 5x by next month.
+                  Incentive infrastructure for onchain protocols and tokens. Launch today, measure this week, 5x by next month.
                 </p>
 
                 {/* Action Buttons */}
@@ -244,7 +244,6 @@ const Hero = () => {
             {/* Scroll hint */}
             <div ref={scrollHintRef} className="mt-8" style={{ opacity: 0 }}>
               <div className="flex items-center gap-2 text-black/40">
-                <span className="font-mono text-xs uppercase tracking-wider">Scroll to explore</span>
                 <ChevronDown className="w-4 h-4 animate-bounce" />
               </div>
             </div>

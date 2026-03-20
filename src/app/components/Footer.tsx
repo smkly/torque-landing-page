@@ -197,7 +197,7 @@ const Footer = () => {
             </div>
             <h2 className="font-display text-2xl sm:text-3xl font-medium text-white leading-[1.1] tracking-tight mb-4">
               Start running incentives{" "}
-              <span className="text-white/40">that actually work.</span>
+              <span className="text-white/40">that work.</span>
             </h2>
             <p className="text-base text-white/60 mb-6">
               Talk to our team and get your first campaign live in under 24 hours.
@@ -217,7 +217,7 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h4 className="font-mono text-xs uppercase tracking-widest text-white/50 mb-4">
-              Stay in the loop
+              Updates
             </h4>
             {state.succeeded ? (
               <div className="flex items-center gap-2 text-white/80 text-sm">
@@ -227,7 +227,7 @@ const Footer = () => {
             ) : (
               <>
                 <p className="text-white/60 text-sm mb-3">
-                  Protocol updates, zero noise.
+                  Protocol updates only.
                 </p>
                 <form onSubmit={handleSubmit} className="flex gap-2">
                   <input
