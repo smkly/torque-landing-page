@@ -185,8 +185,8 @@ const Hero = () => {
                   stagger={0.3}
                   useScrollTrigger={false}
                 >
-                  <span>Stop Wasting Rewards.</span>
-                  <span>Start Growing.</span>
+                  <span>Launch Incentives.</span>
+                  <span>Prove ROI.</span>
                 </SplitText>
 
                 {/* Subheadline */}
@@ -195,7 +195,7 @@ const Hero = () => {
                   className="text-lg md:text-xl text-black/60 mb-8 leading-relaxed"
                   style={{ opacity: 0 }}
                 >
-                  Incentive infrastructure for onchain protocols and tokens. Launch campaigns, measure what works, iterate fast.
+                  Incentive infrastructure for onchain protocols and tokens. Launch today. Measure tomorrow. 5x by next month.
                 </p>
 
                 {/* Action Buttons */}

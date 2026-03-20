@@ -43,7 +43,7 @@ export default function PlaybooksSection() {
               <span className="text-black/40">Ready to Deploy.</span>
             </SplitText>
             <p data-animate="fade-up" className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              Strategies that already work. Plug them in and go.
+              Stolen from $10M+ in live campaigns. Deploy in one click.
             </p>
           </div>
           <div data-animate="fade-up">

@@ -141,6 +141,26 @@ const objectiveGroups: ObjectiveGroup[] = [
         problem: { title: "One-and-Done Traders", points: ["High volume masks mercenary behavior", "Users trade once for rewards then disappear", "No distinction between quality and junk volume"] },
         fix: { title: "Reward trading quality, not just size.", description: "Leaderboards ranked by PnL or consistency, not raw volume. Hold-time requirements filter wash trading.", mechanics: ["PnL Leaderboards", "Hold-Time Requirements", "Volume-Based Raffles"], result: "+77% unique traders" },
       },
+      {
+        id: "prediction",
+        sector: "Prediction Markets",
+        icon: Network,
+        filename: "prediction.strategy",
+        image: "/generated/image/light-mono/network-nodes-light.jpg",
+        insight: { title: "Volume & Market Health", stat: "Fix churn from bad beats, low engagement between events, and wide spreads." },
+        problem: { title: "Three Leaks", points: ["50% rage-quit after losing a 'sure thing' at the last minute", "Users bet on one event and disappear for weeks", "Wide spreads make markets untradeable"] },
+        fix: { title: "Upset protection, active streaks, and spread incentives.", description: "Refund bad-beat losses to retain users. Reward active position portfolios to turn event tourists into daily users. Pay retail to tighten spreads.", mechanics: ["Upset Protection (bad-beat rebates)", "Active Position Streaks (5+ positions)", "Spread Squeezer (limit order rewards)"], result: "Retention + liquidity + DAU" },
+      },
+      {
+        id: "launchpads-volume",
+        sector: "Launchpads",
+        icon: Rocket,
+        filename: "launchpad-volume.strategy",
+        image: "/generated/image/light-mono/data-particles.jpg",
+        insight: { title: "Bonding Curve Volume", stat: "6x token launches. 8x trading volume during creator rebates." },
+        problem: { title: "Launch and Die", points: ["Tokens launch but generate no sustained trading", "Bonding curve volume spikes then flatlines", "No incentive to trade after the initial pump"] },
+        fix: { title: "Creator rebates and trading competitions on new tokens.", description: "Rebate creators based on their token's volume. Run leaderboards on newly launched tokens to sustain post-launch activity.", mechanics: ["Creator Rebates (per-token volume)", "New Token Leaderboards", "Launch Day Raffles"], result: "$6.9M in protocol fees" },
+      },
     ],
   },
   {
@@ -204,14 +224,14 @@ const objectiveGroups: ObjectiveGroup[] = [
         fix: { title: "Breadth multipliers and time-weighted leaderboards.", description: "Escalating multipliers (up to 3x for 5+ launches). Time-weighted deposits shift 81% of volume to first 24 hours.", mechanics: ["Breadth Multipliers (1x → 3x)", "Time-Weighted Leaderboards", "Milestone Unlocks (retroactive)"], result: "6x creator activity increase" },
       },
       {
-        id: "prediction",
+        id: "prediction-ecosystem",
         sector: "Prediction Markets",
         icon: Network,
-        filename: "prediction.strategy",
+        filename: "prediction-ecosystem.strategy",
         image: "/generated/image/light-mono/network-nodes-light.jpg",
-        insight: { title: "Cross-Category Engagement", stat: "Users bet on one event and leave." },
-        problem: { title: "Event-Driven Churn", points: ["Users bet on a single event then exit entirely", "Market creation is under-incentivized", "No progression between categories"] },
-        fix: { title: "Cross-category streaks and market creation rewards.", description: "Require activity across multiple categories to unlock multipliers. Reward market creators for liquidity depth.", mechanics: ["Cross-Category Streak Multipliers", "Market Creation Rebates", "Consolation Rebates (fee refunds for active losers)"], result: "Sustained engagement across events" },
+        insight: { title: "Market Creation & Participation", stat: "Market creation is under-incentivized across prediction platforms." },
+        problem: { title: "No One Creates Markets", points: ["Market creation falls on the platform, not users", "Liquidity depth depends on professional market makers", "No incentive for users to seed new categories"] },
+        fix: { title: "Reward market creators and early liquidity providers.", description: "Creator rebates for new markets that reach volume thresholds. Early liquidity bonuses for users who tighten spreads on new markets.", mechanics: ["Market Creation Rebates", "Early Liquidity Bonuses", "Category Breadth Multipliers"], result: "User-driven market creation" },
       },
     ],
   },
@@ -305,7 +325,15 @@ interface ObjectiveSectionProps {
 function ObjectiveSection({ group, index }: ObjectiveSectionProps) {
   const Icon = group.icon;
   const isAlt = index % 2 === 1;
-  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Auto-select tab based on URL hash
+  const getInitialIdx = () => {
+    if (typeof window === "undefined") return 0;
+    const hash = window.location.hash.replace("#", "");
+    const idx = group.solutions.findIndex(s => s.id === hash);
+    return idx >= 0 ? idx : 0;
+  };
+  const [activeIdx, setActiveIdx] = useState(getInitialIdx);
 
   return (
     <section
@@ -334,7 +362,10 @@ function ObjectiveSection({ group, index }: ObjectiveSectionProps) {
               return (
                 <button
                   key={solution.id}
-                  onClick={() => setActiveIdx(idx)}
+                  onClick={() => {
+                    setActiveIdx(idx);
+                    window.history.replaceState(null, "", `#${solution.id}`);
+                  }}
                   className={`inline-flex items-center gap-2 px-4 py-2 rounded-[3px] font-mono text-xs uppercase tracking-wider transition-all duration-200 ${
                     activeIdx === idx
                       ? "bg-blue text-white border border-blue"

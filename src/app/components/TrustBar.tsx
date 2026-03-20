@@ -22,7 +22,7 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
           Trusted by Leading Companies
         </p>
 
-        {/* Animated logos */}
+        {/* Logos */}
         <div
           data-animate="fade-up"
           className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12"
@@ -43,6 +43,24 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
             </div>
           ))}
           {trailing}
+        </div>
+
+        {/* Social proof stat */}
+        <p
+          data-animate="fade-up"
+          className="font-mono text-xs text-black/30 mt-6 text-center"
+        >
+          $3B+ in volume driven across 1,000+ campaigns
+        </p>
+
+        {/* Testimonial */}
+        <div data-animate="fade-up" className="mt-8 max-w-lg text-center">
+          <p className="text-sm text-black/50 italic leading-relaxed">
+            &ldquo;Torque changed how we think about incentive spend. We went from guessing to knowing exactly what each dollar produced.&rdquo;
+          </p>
+          <p className="text-xs text-black/40 mt-2 font-medium">
+            Stendhal, Head of Growth at Raydium
+          </p>
         </div>
       </div>
     </section>

@@ -41,7 +41,7 @@ interface Operation {
 const OPERATIONS: Operation[] = [
   {
     id: "acquire",
-    label: "01 — ACQUIRE",
+    label: "01 / ACQUIRE",
     headline: "Get Users In the Door",
     description:
       "Turn spend into wallets. Lowest-cost acquisition channels in DeFi.",
@@ -59,7 +59,7 @@ const OPERATIONS: Operation[] = [
   },
   {
     id: "activate",
-    label: "02 — ACTIVATE",
+    label: "02 / ACTIVATE",
     headline: "First Meaningful Action",
     description:
       "Get users from connected wallet to first real trade. Fast.",
@@ -77,7 +77,7 @@ const OPERATIONS: Operation[] = [
   },
   {
     id: "retain",
-    label: "03 — RETAIN",
+    label: "03 / RETAIN",
     headline: "Keep Them Coming Back",
     description:
       "The first week decides everything. Streak mechanics close the gap.",
@@ -95,7 +95,7 @@ const OPERATIONS: Operation[] = [
   },
   {
     id: "scale",
-    label: "04 — SCALE",
+    label: "04 / SCALE",
     headline: "Autopilot Growth",
     description:
       "Set it and forget it. Dynamic rebates that scale with the protocol.",
@@ -113,7 +113,7 @@ const OPERATIONS: Operation[] = [
   },
   {
     id: "transform",
-    label: "05 — TRANSFORM",
+    label: "05 / TRANSFORM",
     headline: "Change User Behavior",
     description:
       "Incentives don\u2019t rent behavior. They change it. The data proves it.",
@@ -306,7 +306,7 @@ function OperationSection({ operation, index }: OperationSectionProps) {
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-            {/* Key Stat — left column */}
+            {/* Key Stat */}
             <div
               data-animate="fade-up"
               className="lg:col-span-4"
@@ -321,7 +321,7 @@ function OperationSection({ operation, index }: OperationSectionProps) {
               </div>
             </div>
 
-            {/* Supporting stats + primitives — right column */}
+            {/* Supporting stats + primitives */}
             <div className="lg:col-span-8 space-y-8">
               {/* Supporting Stats Grid */}
               <div

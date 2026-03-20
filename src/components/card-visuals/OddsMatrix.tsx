@@ -56,7 +56,7 @@ export function OddsMatrix({ color = "#0000FF", className = "", paused = false }
     const columns: OddsColumn[] = [];
     const marginX = w * 0.12;
     const colSpan = w - marginX * 2;
-    const colWidth = 8;
+    const colWidth = 18;
     const colGap = (colSpan - colWidth * colCount) / (colCount - 1);
     const baseY = h * 0.78;
     const maxColHeight = h * 0.55;
@@ -128,10 +128,10 @@ export function OddsMatrix({ color = "#0000FF", className = "", paused = false }
         ctx.setLineDash([]);
 
         // Threshold label
-        ctx.font = "6px monospace";
+        ctx.font = "bold 10px monospace";
         ctx.textAlign = "right";
-        ctx.fillStyle = `${color}${hex(15)}`;
-        ctx.fillText(`${Math.round(threshold * 100)}%`, marginX - 14, thresholdY + 3);
+        ctx.fillStyle = `${color}${hex(30)}`;
+        ctx.fillText(`${Math.round(threshold * 100)}%`, marginX - 14, thresholdY + 4);
       });
 
       // Draw baseline
@@ -150,7 +150,7 @@ export function OddsMatrix({ color = "#0000FF", className = "", paused = false }
         const pulse = Math.sin(time * 1.5 + i * 0.8) * 0.5 + 0.5;
 
         const isFav = col.favorite;
-        const baseAlpha = isFav ? 0.12 : 0.06;
+        const baseAlpha = isFav ? 0.2 : 0.12;
         const fillAlpha = baseAlpha + pulse * 0.03;
 
         // Column glow (for favorite)
@@ -202,16 +202,16 @@ export function OddsMatrix({ color = "#0000FF", className = "", paused = false }
         });
 
         // Percentage label at top
-        ctx.font = `${isFav ? "bold " : ""}7px monospace`;
+        ctx.font = `bold ${isFav ? 13 : 11}px monospace`;
         ctx.textAlign = "center";
-        ctx.fillStyle = `${color}${hex((isFav ? 0.2 : 0.1) * 255)}`;
-        ctx.fillText(`${col.percentage}%`, x + colWidth / 2, colY - 8);
+        ctx.fillStyle = `${color}${hex((isFav ? 0.35 : 0.2) * 255)}`;
+        ctx.fillText(`${col.percentage}%`, x + colWidth / 2, colY - 10);
 
         // Favorite indicator
         if (isFav) {
-          ctx.font = "bold 5px monospace";
-          ctx.fillStyle = `${color}${hex(0.12 * 255)}`;
-          ctx.fillText("FAV", x + colWidth / 2, colY - 16);
+          ctx.font = "bold 8px monospace";
+          ctx.fillStyle = `${color}${hex(0.2 * 255)}`;
+          ctx.fillText("FAV", x + colWidth / 2, colY - 22);
         }
       });
 
@@ -246,9 +246,9 @@ export function OddsMatrix({ color = "#0000FF", className = "", paused = false }
 
       // "ODDS" label
       const labelAlpha = 0.06 + Math.sin(time * 0.5) * 0.02;
-      ctx.font = "bold 7px system-ui";
+      ctx.font = "bold 10px system-ui";
       ctx.textAlign = "center";
-      ctx.fillStyle = `${color}${hex(labelAlpha * 255)}`;
+      ctx.fillStyle = `${color}${hex(labelAlpha * 1.5 * 255)}`;
       ctx.fillText("PROBABILITY", w * 0.5, h * 0.12);
 
       if (!pausedRef.current) {
