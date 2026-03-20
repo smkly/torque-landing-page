@@ -4,6 +4,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ProductTerminal from "../components/ProductTerminal";
 import { Button } from "@/components/ui/button";
 import { CardVisualWrapper } from "@/components/card-visuals/CardVisualWrapper";
 import { ImageGradient } from "@/components/ascii/ImageGradient";
@@ -217,6 +218,25 @@ export default function PlatformPage() {
             ].map((item, index) => (
               <HowItWorksCard key={item.step} item={item} index={index} />
             ))}
+          </div>
+        </section>
+
+        {/* MCP Terminal */}
+        <section className="w-full px-6 md:px-12 lg:px-20 py-16 md:py-20 border-t border-black/10">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <span className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40 border border-black/10 px-2 py-1 rounded-[3px]">
+                <span className="w-1 h-1 bg-blue rounded-full" />
+                MCP / API
+              </span>
+              <h2 data-animate="fade-up" className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mt-3">
+                See It Working
+              </h2>
+              <p data-animate="fade-up" className="text-base text-black/60 mt-3">
+                Create campaigns, measure ROI, and segment users. All from the terminal.
+              </p>
+            </div>
+            <ProductTerminal />
           </div>
         </section>
 
