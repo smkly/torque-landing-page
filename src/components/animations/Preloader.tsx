@@ -3,6 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+const VISITED_KEY = "torque_visited";
+
 interface PreloaderProps {
   onReveal?: () => void;
   onComplete?: () => void;
@@ -21,6 +23,18 @@ export function Preloader({ onReveal, onComplete }: PreloaderProps) {
       onReveal?.();
       onComplete?.();
       return;
+    }
+
+    // Skip for returning visitors
+    try {
+      if (localStorage.getItem(VISITED_KEY)) {
+        setIsDone(true);
+        onReveal?.();
+        onComplete?.();
+        return;
+      }
+    } catch {
+      // localStorage may be unavailable (private browsing, etc.)
     }
 
     // Lock scroll during preloader
@@ -46,62 +60,69 @@ export function Preloader({ onReveal, onComplete }: PreloaderProps) {
 
     const tl = gsap.timeline();
 
-    // Phase 1: Stroke draws in + gentle rotation (0 → 1.2s)
+    // Phase 1: Stroke draws in + gentle rotation (0 -> 0.7s)
     tl.to(path, {
       strokeDashoffset: 0,
-      duration: 1.2,
+      duration: 0.7,
       ease: "power2.inOut",
     }, 0);
 
     tl.to(svg, {
       rotation: 0,
       scale: 1,
-      duration: 1.2,
+      duration: 0.7,
       ease: "power2.inOut",
     }, 0);
 
-    // Phase 2: Fill fades in, stroke fades out (1.0 → 1.5s)
+    // Phase 2: Fill fades in, stroke fades out (0.55 -> 0.85s)
     tl.to(path, {
       fill: "#010101",
       stroke: "transparent",
-      duration: 0.5,
+      duration: 0.3,
       ease: "power1.in",
-    }, 1.0);
+    }, 0.55);
 
-    // Phase 3: Brief hold + subtle pulse (1.5 → 1.8s)
+    // Phase 3: Brief pulse (0.85 -> 1.0s)
     tl.fromTo(svg, {
       scale: 1,
     }, {
       scale: 1.05,
-      duration: 0.15,
+      duration: 0.1,
       ease: "power2.out",
       yoyo: true,
       repeat: 1,
-    }, 1.5);
+    }, 0.85);
 
     // Phase 4: Signal reveal
     tl.call(() => {
       onReveal?.();
-    }, undefined, 1.8);
+    }, undefined, 1.0);
 
     // Phase 5: Scale up + fade overlay away
     tl.to(svg, {
       scale: 1.5,
       opacity: 0,
-      duration: 0.4,
+      duration: 0.25,
       ease: "power2.in",
-    }, 1.8);
+    }, 1.0);
 
     tl.to(overlayRef.current, {
       opacity: 0,
-      duration: 0.35,
+      duration: 0.2,
       ease: "power2.inOut",
       onComplete: () => {
         document.body.style.overflow = "";
         setIsDone(true);
         onComplete?.();
+
+        // Mark as visited for future loads
+        try {
+          localStorage.setItem(VISITED_KEY, "1");
+        } catch {
+          // Ignore storage errors
+        }
       },
-    }, 1.9);
+    }, 1.05);
 
     return () => {
       tl.kill();

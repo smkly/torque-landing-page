@@ -8,7 +8,6 @@ import React, {
   useRef,
   useCallback,
 } from "react";
-import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -23,7 +22,6 @@ interface ScrollState {
 }
 
 interface ScrollContextValue extends ScrollState {
-  lenis: Lenis | null;
   scrollTo: (target: string | number | HTMLElement, options?: object) => void;
 }
 
@@ -33,7 +31,6 @@ const ScrollContext = createContext<ScrollContextValue>({
   direction: 0,
   isScrolling: false,
   scrollY: 0,
-  lenis: null,
   scrollTo: () => {},
 });
 
@@ -43,16 +40,9 @@ export function useScrollContext() {
 
 interface ScrollProviderProps {
   children: React.ReactNode;
-  options?: {
-    lerp?: number;
-    duration?: number;
-    smoothWheel?: boolean;
-    wheelMultiplier?: number;
-  };
 }
 
-export function ScrollProvider({ children, options = {} }: ScrollProviderProps) {
-  const lenisRef = useRef<Lenis | null>(null);
+export function ScrollProvider({ children }: ScrollProviderProps) {
   const [scrollState, setScrollState] = useState<ScrollState>({
     progress: 0,
     velocity: 0,
@@ -61,71 +51,85 @@ export function ScrollProvider({ children, options = {} }: ScrollProviderProps) 
     scrollY: 0,
   });
 
+  const lastScrollY = useRef(0);
+  const lastTime = useRef(0);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
   const scrollTo = useCallback(
-    (target: string | number | HTMLElement, scrollOptions?: object) => {
-      lenisRef.current?.scrollTo(target, scrollOptions);
+    (target: string | number | HTMLElement, options?: object) => {
+      if (typeof target === "number") {
+        window.scrollTo({ top: target, behavior: "smooth" });
+      } else if (typeof target === "string") {
+        const el = document.querySelector(target);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      } else if (target instanceof HTMLElement) {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
     },
     []
   );
 
   useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const now = performance.now();
+      const dt = now - lastTime.current;
 
-    const lenis = new Lenis({
-      lerp: 1,
-      duration: 0,
-      smoothWheel: false,
-      wheelMultiplier: options.wheelMultiplier ?? 1,
-    });
-
-    lenisRef.current = lenis;
-
-    let scrollTimeout: NodeJS.Timeout;
-
-    lenis.on("scroll", (e: Lenis) => {
       const documentHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress = documentHeight > 0 ? e.scroll / documentHeight : 0;
+      const progress = documentHeight > 0 ? currentY / documentHeight : 0;
+
+      const delta = currentY - lastScrollY.current;
+      const velocity = dt > 0 ? delta / (dt / 1000) : 0;
+      const direction = delta > 0 ? 1 : delta < 0 ? -1 : 0;
+
+      lastScrollY.current = currentY;
+      lastTime.current = now;
 
       setScrollState({
         progress: Math.min(Math.max(progress, 0), 1),
-        velocity: e.velocity,
-        direction: e.direction,
+        velocity,
+        direction,
         isScrolling: true,
-        scrollY: e.scroll,
+        scrollY: currentY,
       });
 
+      // Update ScrollTrigger on each scroll event
+      ScrollTrigger.update();
+
       // Reset isScrolling after scroll stops
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+      scrollTimeout.current = setTimeout(() => {
         setScrollState((prev) => ({ ...prev, isScrolling: false }));
       }, 150);
-    });
+    };
 
-    // Sync Lenis with GSAP ticker (single RAF loop, better perf)
-    lenis.on("scroll", ScrollTrigger.update);
+    // Initialize values
+    lastScrollY.current = window.scrollY;
+    lastTime.current = performance.now();
 
-    const tickerCallback = (time: number) => {
-      lenis.raf(time * 1000);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    // Keep GSAP ticker running for ScrollTrigger (needed for pinned animations etc.)
+    const tickerCallback = () => {
+      ScrollTrigger.update();
     };
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      window.removeEventListener("scroll", onScroll);
       gsap.ticker.remove(tickerCallback);
-      lenis.destroy();
-      clearTimeout(scrollTimeout);
+      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     };
-  }, [options.lerp, options.duration, options.smoothWheel, options.wheelMultiplier]);
+  }, []);
 
   return (
     <ScrollContext.Provider
       value={{
         ...scrollState,
-        lenis: lenisRef.current,
         scrollTo,
       }}
     >
