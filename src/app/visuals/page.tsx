@@ -57,6 +57,11 @@ const loaders: Record<string, () => Promise<{ default: React.ComponentType<Recor
 
 const names = Object.keys(loaders);
 
+const agentBuilt = new Set([
+  "EpochCycle", "SybilFilter", "MilestoneStairs", "BudgetDrain", "ChurnCliff",
+  "QuestPath", "WalletTiers", "CrossProtocol", "CompoundRatchet", "AirdropShower",
+]);
+
 // Lazy-load a single visual when it enters viewport
 function LazyVisual({ name }: { name: string }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -86,9 +91,14 @@ function LazyVisual({ name }: { name: string }) {
           </CardVisualWrapper>
         )}
       </div>
-      <div className="p-3 border-t border-black/5">
-        <p className="font-mono text-xs font-medium text-black">{name}</p>
-        <p className="font-mono text-[10px] text-black/40 mt-0.5">card-visuals/{name}.tsx</p>
+      <div className="p-3 border-t border-black/5 flex items-start justify-between">
+        <div>
+          <p className="font-mono text-xs font-medium text-black">{name}</p>
+          <p className="font-mono text-[10px] text-black/40 mt-0.5">card-visuals/{name}.tsx</p>
+        </div>
+        {agentBuilt.has(name) && (
+          <span className="font-mono text-[9px] px-1.5 py-0.5 rounded-[2px] bg-blue/10 text-blue">NEW</span>
+        )}
       </div>
     </div>
   );
