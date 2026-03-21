@@ -25,7 +25,7 @@ export default function TopBanner() {
         href="https://docs.torque.so/mcp"
         className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider hover:opacity-80 transition-opacity"
       >
-        Try our MCP
+        Get started quickly — try our MCP
         <ArrowUpRight className="w-3 h-3" />
       </Link>
     </div>

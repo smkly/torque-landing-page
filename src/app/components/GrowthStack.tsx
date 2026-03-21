@@ -44,7 +44,7 @@ export default function GrowthStack() {
               <span className="text-black/40">Toolkit</span>
             </SplitText>
             <p data-animate="fade-up" className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              Solve retention and acquisition with five core mechanisms.
+              Solve retention, engagement, and acquisition problems with five primary mechanisms.
             </p>
           </div>
           <div data-animate="fade-up">
@@ -61,8 +61,8 @@ export default function GrowthStack() {
           <div data-animate="fade-up" className="md:col-span-2 lg:col-span-2">
             <FeatureCard
               icon={Layers}
-              title="Five mechanisms for retention, engagement, and acquisition"
-              description="Leaderboards concentrate your best traders. Lotteries pull in everyone else. Gifts, rebates, and referrals handle activation, retention, and growth."
+              title="Five Mechanisms. Every Growth Problem."
+              description="Leaderboards drive intensity. Lotteries engage the masses. Gifts activate new users. Rebates sustain loyalty. Referrals go viral."
               visual={<RewardFlow color="#0008FF" />}
               filename="campaigns.config"
               features={[
@@ -82,7 +82,7 @@ export default function GrowthStack() {
             <FeatureCard
               icon={Shield}
               title="Stop Paying Wallets That Don't Matter"
-              description="Filter bots and zero-value wallets before they touch your budget."
+              description="Filter wash traders, bots, and zero-value wallets before they touch your budget."
               visual={<RankOrbit color="#0008FF" competitorCount={6} />}
               filename="sybil.guard"
               metric="15K+ sybils caught"
@@ -93,8 +93,8 @@ export default function GrowthStack() {
           <div data-animate="fade-up">
             <FeatureCard
               icon={BarChart3}
-              title="Know What Each Dollar Produced"
-              description="Numbers you can put in front of your board."
+              title="Know Exactly What Each Dollar Produced"
+              description="Real numbers you can put in front of your board. Not vibes."
               visual={<NeuralPulse color="#0008FF" nodeCount={10} />}
               filename="analytics.roi"
               metric="Real-time measurement"
@@ -235,10 +235,10 @@ function APICard() {
           </div>
 
           <h3 className="relative font-display text-base md:text-lg font-medium mb-1 text-black group-hover:text-blue transition-colors">
-            Live in 5 Minutes
+            Live in 5 Minutes, Not 5 Weeks
           </h3>
           <p className="relative text-black/60 text-xs leading-relaxed mb-3">
-            Whitelabel SDK. Your brand and UI, our engine.
+            Whitelabel SDK. Your brand, your UI, our engine.
           </p>
 
           <div className="relative pt-3 border-t border-black/10 flex flex-wrap items-center gap-1.5">

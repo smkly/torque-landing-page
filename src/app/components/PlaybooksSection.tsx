@@ -39,11 +39,11 @@ export default function PlaybooksSection() {
               <span>Growth Playbooks</span>
             </div>
             <SplitText tag="h2" className="font-display text-2xl sm:text-3xl lg:text-4xl font-medium text-black leading-[1.1] tracking-tight">
-              <span>Battle-tested and</span>
-              <span className="text-black/40">ready to deploy</span>
+              <span>Battle-Tested.</span>
+              <span className="text-black/40">Ready to Deploy.</span>
             </SplitText>
             <p data-animate="fade-up" className="text-base md:text-lg text-black/60 mt-4 max-w-xl">
-              Built from $10M+ in live campaigns. One-click deploy.
+              Stolen from $10M+ in live campaigns. Deploy in one click.
             </p>
           </div>
           <div data-animate="fade-up">

@@ -19,7 +19,7 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
           data-animate="fade-up"
           className="font-mono text-xs uppercase tracking-wider text-black/40 mb-8 text-center"
         >
-          Trusted by
+          Trusted by Leading Companies
         </p>
 
         {/* Logos */}
@@ -50,7 +50,7 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
           data-animate="fade-up"
           className="font-mono text-xs text-black/30 mt-6 text-center"
         >
-          $3B+ in volume across 1,000+ campaigns
+          $3B+ in volume driven across 1,000+ campaigns
         </p>
 
         {/* Testimonial */}
