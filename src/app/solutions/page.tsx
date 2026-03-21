@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -326,14 +326,14 @@ function ObjectiveSection({ group, index }: ObjectiveSectionProps) {
   const Icon = group.icon;
   const isAlt = index % 2 === 1;
 
-  // Auto-select tab based on URL hash
-  const getInitialIdx = () => {
-    if (typeof window === "undefined") return 0;
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  // Auto-select tab based on URL hash after hydration
+  useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const idx = group.solutions.findIndex(s => s.id === hash);
-    return idx >= 0 ? idx : 0;
-  };
-  const [activeIdx, setActiveIdx] = useState(getInitialIdx);
+    if (idx >= 0) setActiveIdx(idx);
+  }, [group.solutions]);
 
   return (
     <section
