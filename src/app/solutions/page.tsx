@@ -178,7 +178,7 @@ const objectiveGroups: ObjectiveGroup[] = [
         icon: Coins,
         filename: "token.strategy",
         image: "/generated/image/light-mono/floating-mass-01.jpg",
-        insight: { title: "Velocity & Distribution", stat: "$625M volume driven. 165K participants." },
+        insight: { title: "Velocity & Distribution", stat: "$625M incentivized volume. 165K participants." },
         problem: { title: "Dead Liquidity", points: ["High market cap, zero velocity, tokens sit in wallets", "No incentive for holders to transact", "Distribution relies on market makers, not organic activity"] },
         fix: { title: "Dynamic rebates that scale with activity.", description: "Proportional daily rebates with onchain settlement. Higher volume = lower bips. Self-regulating.", mechanics: ["Dynamic Rebates (proportional daily)", "Looping Bonuses (leverage incentives)", "Spend Rewards"], result: "387x volume per rebate dollar" },
       },
@@ -268,7 +268,7 @@ export default function SolutionsPage() {
               data-animate="fade-up"
               className="text-base md:text-lg text-black/60 max-w-2xl mb-6"
             >
-              Every incentive maps to one objective. Volume, capital, or ecosystem. Pick yours and see the playbook.
+              Every incentive maps to one objective. Volume, capital, or ecosystem. Pick yours.
             </p>
 
             {/* Quick Nav: Objectives */}
@@ -507,8 +507,8 @@ function SolutionCard({ solution }: SolutionCardProps) {
               See how we implemented this for{" "}
               {solution.sector.toLowerCase()} protocols
             </span>
-            <Button variant="outline" size="sm" href="/playbooks">
-              View Playbook
+            <Button variant="outline" size="sm" href="/how-it-works">
+              Learn More
               <ArrowUpRight className="w-3 h-3 ml-1" />
             </Button>
           </div>
@@ -559,32 +559,31 @@ function SolutionsCTA({ onOpenModal }: SolutionsCTAProps) {
           className="inline-flex items-center gap-2 mb-3 font-mono text-[10px] uppercase tracking-wider text-black/40"
         >
           <Rocket className="w-3 h-3" />
-          Deploy Now
+          Get Started
         </div>
         <SplitText
           tag="h2"
           className="font-display text-2xl sm:text-3xl font-medium text-black leading-[1.1] tracking-tight mb-4"
         >
-          <span>Ready to engineer</span>
-          <span className="text-black/40">protocol equilibrium?</span>
+          <span>Ready to launch</span>
+          <span className="text-black/40">your first campaign?</span>
         </SplitText>
         <p
           data-animate="fade-up"
           className="text-base text-black/60 mb-6"
         >
-          Torque exists to replace &ldquo;vibes-based&rdquo; marketing with
-          deterministic, programmable ROI. No waste. Just growth.
+          Get your first campaign live in under 24 hours.
         </p>
         <div
           data-animate="fade-up"
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <Button variant="accent" onClick={onOpenModal}>
-            Deploy Logic
+            Book a Demo
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
-          <Button variant="outline" href="/primitives">
-            Explore Primitives
+          <Button variant="outline" href="/how-it-works">
+            How It Works
             <ArrowUpRight className="w-4 h-4 ml-2" />
           </Button>
         </div>

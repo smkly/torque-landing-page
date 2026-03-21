@@ -141,7 +141,7 @@ export default function PlaybooksPage() {
     <>
       <Navbar />
 
-      <main className="relative z-10 min-h-screen bg-white pt-24 md:pt-32">
+      <main className="relative z-10 min-h-screen bg-white pt-32 md:pt-40">
         {/* ================================================================= */}
         {/* Hero Section */}
         {/* ================================================================= */}
@@ -170,7 +170,7 @@ export default function PlaybooksPage() {
               data-animate="fade-up"
               className="text-lg md:text-xl text-black/60 max-w-2xl mb-8"
             >
-              Campaigns end. Systems compound. Here&apos;s the framework behind $3B+ in volume driven.
+              Campaigns end. Systems compound. The framework behind $5B+ in incentivized volume.
             </p>
 
             {/* Strategy Library Link */}

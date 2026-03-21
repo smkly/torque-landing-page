@@ -6,7 +6,7 @@ export interface Stat {
 export const heroStats: Stat[] = [
   { value: "5x", label: "ROI on Incentive Spend" },
   { value: "$10M+", label: "Incentives Distributed" },
-  { value: "$3B+", label: "Volume Driven" },
+  { value: "$5B+", label: "Incentivized Volume" },
 ];
 
 // Rotating text phrases for hero

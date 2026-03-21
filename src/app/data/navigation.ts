@@ -9,7 +9,6 @@ export const menuItems: MenuItem[] = [
   { label: "How It Works", href: "/how-it-works" },
   { label: "Solutions", href: "/solutions" },
   { label: "Platform", href: "/platform" },
-  { label: "Playbooks", href: "/playbooks" },
 ];
 
 export interface Logo {

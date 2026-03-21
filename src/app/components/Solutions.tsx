@@ -32,9 +32,10 @@ interface SolutionCardProps {
   diagnosis: string;
   fix: string;
   visualFill?: "box" | "full";
+  solutionHash?: string;
 }
 
-function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, diagnosis, fix, visualFill }: SolutionCardProps) {
+function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, diagnosis, fix, visualFill, solutionHash }: SolutionCardProps) {
   return (
     <VisualCard
       visual={<Visual />}
@@ -64,7 +65,7 @@ function SolutionCard({ icon: Icon, title, subtitle, filename, visual: Visual, d
         </div>
       </div>
 
-      <a href="/playbooks" className="relative inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
+      <a href={solutionHash ? `/solutions#${solutionHash}` : "/solutions"} className="relative inline-flex items-center text-xs text-blue hover:text-black transition-colors font-medium">
         View Strategy <ArrowUpRight className="w-3 h-3 ml-1" />
       </a>
     </VisualCard>
@@ -114,6 +115,7 @@ export default function Solutions() {
               visual={RetentionLoop}
               diagnosis="Users trade once for the airdrop and ghost. Rented volume."
               fix="Streaks, lotteries, and loyalty that reward consistency over size."
+              solutionHash="terminals"
             />
           </div>
           <div data-animate="fade-up">
@@ -125,6 +127,7 @@ export default function Solutions() {
               visual={LiquidityPool}
               diagnosis="Users route wherever fees are cheapest. Zero loyalty, zero stickiness."
               fix="Leaderboards, referrals, and raffles that give users a reason to stay."
+              solutionHash="dexs"
             />
           </div>
           <div data-animate="fade-up">
@@ -137,6 +140,7 @@ export default function Solutions() {
               visualFill="full"
               diagnosis="High market cap, zero velocity. Your token sits in wallets doing nothing."
               fix="Referral rebates and spend rewards that turn holders into active users."
+              solutionHash="tokens"
             />
           </div>
         </div>

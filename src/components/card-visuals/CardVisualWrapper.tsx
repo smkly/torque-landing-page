@@ -49,7 +49,7 @@ export function CardVisualWrapper({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          if (isMobile) {
+          if (isMobile || window.matchMedia("(max-width: 768px)").matches) {
             setState("PLAYING");
           } else if (!hasPreviewedRef.current) {
             setState("PREVIEWING");
@@ -68,7 +68,7 @@ export function CardVisualWrapper({
           }
         }
       },
-      { threshold },
+      { threshold: isMobile || (typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches) ? 0.1 : threshold },
     );
 
     observer.observe(el);

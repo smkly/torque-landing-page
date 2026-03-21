@@ -1077,8 +1077,8 @@ export default function ROIPage() {
                     Book a Demo
                     <ArrowUpRight className="w-4 h-4 ml-2" />
                   </Button>
-                  <Button variant="outline" href="/playbooks">
-                    View Case Studies
+                  <Button variant="outline" href="/solutions">
+                    View Solutions
                     <ArrowUpRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>

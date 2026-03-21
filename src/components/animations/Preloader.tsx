@@ -56,59 +56,40 @@ export function Preloader({ onReveal, onComplete }: PreloaderProps) {
       strokeWidth: 6,
     });
 
-    gsap.set(svg, { opacity: 1, scale: 0.95, rotation: -90 });
+    gsap.set(svg, { opacity: 1, scale: 1 });
 
     const tl = gsap.timeline();
 
-    // Phase 1: Stroke draws in + gentle rotation (0 -> 0.7s)
+    // Phase 1: Stroke draws in (0 -> 0.8s) — no rotation, simpler GPU load
     tl.to(path, {
       strokeDashoffset: 0,
-      duration: 0.7,
-      ease: "power2.inOut",
+      duration: 0.8,
+      ease: "power2.out",
     }, 0);
 
-    tl.to(svg, {
-      rotation: 0,
-      scale: 1,
-      duration: 0.7,
-      ease: "power2.inOut",
-    }, 0);
-
-    // Phase 2: Fill fades in, stroke fades out (0.55 -> 0.85s)
+    // Phase 2: Fill fades in, stroke fades out (0.6 -> 0.9s)
     tl.to(path, {
       fill: "#010101",
       stroke: "transparent",
       duration: 0.3,
       ease: "power1.in",
-    }, 0.55);
+    }, 0.6);
 
-    // Phase 3: Brief pulse (0.85 -> 1.0s)
-    tl.fromTo(svg, {
-      scale: 1,
-    }, {
-      scale: 1.05,
-      duration: 0.1,
-      ease: "power2.out",
-      yoyo: true,
-      repeat: 1,
-    }, 0.85);
-
-    // Phase 4: Signal reveal
+    // Phase 3: Signal reveal
     tl.call(() => {
       onReveal?.();
-    }, undefined, 1.0);
+    }, undefined, 0.9);
 
-    // Phase 5: Scale up + fade overlay away
+    // Phase 4: Fade out overlay
     tl.to(svg, {
-      scale: 1.5,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.3,
       ease: "power2.in",
-    }, 1.0);
+    }, 0.9);
 
     tl.to(overlayRef.current, {
       opacity: 0,
-      duration: 0.2,
+      duration: 0.25,
       ease: "power2.inOut",
       onComplete: () => {
         document.body.style.overflow = "";

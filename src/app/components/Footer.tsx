@@ -64,7 +64,7 @@ const Footer = () => {
   const productLinks = [
     { label: "Platform", href: "/platform" },
     { label: "Solutions", href: "/solutions" },
-    { label: "Playbooks", href: "/playbooks" },
+    { label: "How It Works", href: "/how-it-works" },
   ];
 
   const companyLinks = [
@@ -207,8 +207,8 @@ const Footer = () => {
                 Book a Demo
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
-              <Button variant="inverse-outline" href="/playbooks">
-                View Playbooks
+              <Button variant="inverse-outline" href="/how-it-works">
+                How It Works
                 <ArrowUpRight className="w-4 h-4 ml-2" />
               </Button>
             </div>

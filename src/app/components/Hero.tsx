@@ -143,15 +143,86 @@ const Hero = () => {
 
   return (
     <>
-      <section className="relative w-full h-screen">
+      {/* Mobile: ASCII section that fades on scroll + content below */}
+      <div className="md:hidden">
+        {/* ASCII full-screen on mobile */}
+        <section className="relative w-full h-[70vh] overflow-hidden">
+          <div className="absolute inset-0">
+            <InteractiveGradient />
+            <div className="absolute inset-0">
+              <TorqueHelicoid />
+            </div>
+          </div>
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent pointer-events-none" />
+          {/* Scroll hint centered */}
+          <div className="absolute bottom-6 left-0 right-0 flex justify-center z-10">
+            <div className="flex items-center gap-2 text-black/40">
+              <ChevronDown className="w-5 h-5 animate-bounce" />
+            </div>
+          </div>
+        </section>
+
+        {/* Content below ASCII on mobile */}
+        <section className="relative w-full bg-white px-6 py-10">
+          <div
+            ref={badgeRef}
+            className="inline-flex items-center gap-2 mb-6 font-mono text-xs uppercase tracking-wider text-black/60 border border-black/10 px-3 py-1.5 rounded-[3px]"
+          >
+            <Terminal className="w-3 h-3" />
+            <span>$5B+ in incentivized volume</span>
+            <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
+          </div>
+
+          <h1 className="text-4xl font-display font-semibold leading-[1.1] tracking-tight mb-6 text-black">
+            Launch Incentives.<br />Prove ROI.
+          </h1>
+
+          <p className="text-lg text-black/60 mb-8 leading-relaxed">
+            Incentive infrastructure for onchain protocols and tokens.
+          </p>
+
+          <div className="flex flex-col items-start gap-4 pointer-events-auto">
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              variant="accent"
+              className="group"
+            >
+              Book a Demo
+              <ArrowUpRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Button>
+            <Button
+              variant="outline"
+              href="/how-it-works"
+            >
+              See How It Works
+              <ArrowUpRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+
+          <div className="flex flex-row items-start gap-6 mt-10">
+            {heroStats.map((stat, index) => (
+              <div key={index} className="flex flex-col items-start">
+                <span className="text-xl font-display font-semibold text-black tracking-tight">
+                  {stat.value}
+                </span>
+                <span className="text-xs text-black/50 mt-1">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* Desktop: original layout */}
+      <section className="relative w-full h-screen hidden md:block">
         {/* Background layers */}
         <div className="absolute inset-0 z-0">
           <InteractiveGradient />
 
-          {/* ASCII Helicoid — top 40% on mobile with fade, full viewport on desktop */}
-          <div className="absolute inset-x-0 top-0 h-[40%] md:h-full md:inset-0 overflow-hidden">
+          {/* ASCII Helicoid — full viewport on desktop */}
+          <div className="absolute inset-0">
             <TorqueHelicoid />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none md:hidden" />
           </div>
 
           {/* Bottom fade — soft transition to white content */}
@@ -159,9 +230,9 @@ const Hero = () => {
 
         </div>
 
-        {/* Hero content — overlays the scene (pointer-events-none so drag reaches helicoid) */}
+        {/* Hero content — overlays the scene */}
         <div className="absolute inset-0 z-20 pointer-events-none">
-          <div className="w-full h-full flex flex-col justify-end pointer-events-none px-[1.5rem] md:px-[3.5rem] lg:px-[4.5rem] pb-12">
+          <div className="w-full h-full flex flex-col justify-end pointer-events-none px-[3.5rem] lg:px-[4.5rem] pb-12">
             {/* Bottom row: hero text left, stats right */}
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
               {/* Left — Hero content */}
@@ -173,7 +244,7 @@ const Hero = () => {
                   style={{ opacity: 0 }}
                 >
                   <Terminal className="w-3 h-3" />
-                  <span>$3B+ in volume driven</span>
+                  <span>$5B+ in incentivized volume</span>
                   <span className="w-1.5 h-1.5 bg-blue rounded-full animate-pulse" />
                 </div>
 
@@ -214,7 +285,7 @@ const Hero = () => {
                   </Button>
                   <Button
                     variant="outline"
-                    href="/primitives"
+                    href="/how-it-works"
                     style={{ opacity: 0 }}
                   >
                     See How It Works

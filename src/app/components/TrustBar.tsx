@@ -50,18 +50,10 @@ export default function TrustBar({ trailing }: { trailing?: React.ReactNode }) {
           data-animate="fade-up"
           className="font-mono text-xs text-black/30 mt-6 text-center"
         >
-          $3B+ in volume driven across 1,000+ campaigns
+          $5B+ in incentivized volume across 1,000+ campaigns
         </p>
 
-        {/* Testimonial */}
-        <div data-animate="fade-up" className="mt-8 max-w-lg text-center">
-          <p className="text-sm text-black/50 italic leading-relaxed">
-            &ldquo;Torque changed how we think about incentive spend. We went from guessing to knowing exactly what each dollar produced.&rdquo;
-          </p>
-          <p className="text-xs text-black/40 mt-2 font-medium">
-            Stendhal, Head of Growth at Raydium
-          </p>
-        </div>
+        {/* Testimonial — hidden for now */}
       </div>
     </section>
   );
