@@ -327,16 +327,28 @@ function ObjectiveSection({ group, index }: ObjectiveSectionProps) {
   const isAlt = index % 2 === 1;
 
   const [activeIdx, setActiveIdx] = useState(0);
+  const sectionRef = React.useRef<HTMLElement>(null);
 
-  // Auto-select tab based on URL hash after hydration
+  // Auto-select tab based on URL hash after hydration + scroll to section
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     const idx = group.solutions.findIndex(s => s.id === hash);
-    if (idx >= 0) setActiveIdx(idx);
+    if (idx >= 0) {
+      setActiveIdx(idx);
+      // Scroll the objective section to top of viewport with 14px offset
+      setTimeout(() => {
+        const el = sectionRef.current;
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 14;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      }, 100);
+    }
   }, [group.solutions]);
 
   return (
     <section
+      ref={sectionRef}
       id={group.id}
       className={`w-full border-b border-black/10 ${isAlt ? "bg-black/[0.015]" : "bg-white"}`}
     >
