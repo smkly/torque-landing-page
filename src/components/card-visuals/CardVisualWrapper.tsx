@@ -111,13 +111,13 @@ export function CardVisualWrapper({
       setState((prev) => (prev === "PLAYING" ? "IDLE" : prev));
     };
 
-    target.addEventListener("mouseenter", onEnter);
-    target.addEventListener("mouseleave", onLeave);
+    const eventTarget = target!;
+    eventTarget.addEventListener("mouseenter", onEnter);
+    eventTarget.addEventListener("mouseleave", onLeave);
 
-    const cleanup = target;
     return () => {
-      cleanup?.removeEventListener("mouseenter", onEnter);
-      cleanup?.removeEventListener("mouseleave", onLeave);
+      eventTarget.removeEventListener("mouseenter", onEnter);
+      eventTarget.removeEventListener("mouseleave", onLeave);
     };
   }, [isMobile]);
 
